@@ -4,7 +4,7 @@ const admin = urlAdmin.searchParams.get("admin");
 
 // Obtém o parâmetro id_tabela e id_ticket da URL.
 const urlParams = new URLSearchParams(window.location.search);
-const idTabela = urlParams.get('id_tabela');
+const idTabela = urlParams.get('id_numerico');
 
 // Define arrays vazios para armazenarem as cláusulas SET das atualizações dos dados.
 var clausulasSetCatDadosConexoes = [];
@@ -21,7 +21,7 @@ var updateQuery = [];
 var alteracoes = {};
 
 // Define a url usada para a requisição.
-const url1 = `/resultado?id_tabela=${idTabela}`;
+const url1 = `/resultado?id_numerico=${idTabela}`;
 
 // Realiza uma requisição para obter dados da tabela.
 fetch(url1)
@@ -50,7 +50,7 @@ fetch(url1)
   });
 
 // Define a url usada para a requisição
-const url2 = `/campos?id_tabela_estrangeira=${idTabela}`;
+const url2 = `/campos?id_numerico=${idTabela}`;
 
 // Realiza uma requisição para obter dados da tabela.
 fetch(url2)
@@ -308,7 +308,7 @@ function exibirResumoAlteracoes() {
   const encodedIdTabela = encodeURIComponent(idTabela);
 
   // Monta a string de URL contendo os parâmetros id_tabela e admin com seus respectivos valores.
-  href = `/ticketResumo.html?id_tabela=${encodedIdTabela}&admin=${admin}`
+  href = `/ticketResumo.html?id_numerico=${encodedIdTabela}&admin=${admin}`
 
   // Redireciona a página atual para a URL montada.
   window.location.href = href;

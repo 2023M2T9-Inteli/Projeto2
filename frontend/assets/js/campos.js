@@ -1,9 +1,9 @@
 // Obtém o parâmetro id_tabela da URL
 const urlParams = new URLSearchParams(window.location.search);
-const idTabela = urlParams.get('id_tabela');
+const idTabela = urlParams.get('id_numerico');
 
 // Define a url usada para a requisição
-const url = `/campos?id_tabela_estrangeira=${idTabela}`;
+const url = `/campos?id_numerico=${idTabela}`;
 
 // Realiza uma requisição para obter dados da tabela 
 fetch(url)

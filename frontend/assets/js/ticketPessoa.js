@@ -4,10 +4,10 @@ const admin = urlAdmin.searchParams.get("admin");
 
 // Obtém o parâmetro id_tabela da URL.
 const urlParams = new URLSearchParams(window.location.search);
-const idTabela = urlParams.get('id_tabela');
+const idTabela = urlParams.get('id_numerico');
 
 // Define a url usada para a requisição do titulo da tabela.
-const url = `/tabela/nome?id_tabela=${idTabela}`;
+const url = `/tabela/nome?id_numerico=${idTabela}`;
 
 // Realiza uma requisição para obter o titulo da tabela.
 fetch(url)
@@ -37,12 +37,12 @@ function continuarTicket(event) {
 
     // Obtém o parâmetro id_tabela da URL.
     const urlParams = new URLSearchParams(window.location.search);
-    const idTabela = urlParams.get('id_tabela');
+    const idTabela = urlParams.get('id_numerico');
     // Codifica os valores das variáveis idTabela e idTicket usando a função encodeURIComponent.
     const encodedIdTabela = encodeURIComponent(idTabela);
 
     // Monta a string de URL contendo os parâmetros id_tabela e admin com seus respectivos valores.
-    href = `/ticketGeral.html?id_tabela=${encodedIdTabela}&admin=${admin}`
+    href = `/ticketGeral.html?id_numerico=${encodedIdTabela}&admin=${admin}`
     // Redireciona a página atual para a URL montada.
     window.location.href = href;
 }

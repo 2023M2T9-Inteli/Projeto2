@@ -4,10 +4,10 @@ const admin = urlAdmin.searchParams.get("admin");
 
 // Obtém o parâmetro id_tabela e id_ticket da URL
 const urlParams = new URLSearchParams(window.location.search);
-const idTabela = urlParams.get('id_tabela');
+const idTabela = urlParams.get('id_numerico');
 
 // Define a url usada para a requisição do titulo da tabela.
-const url = `/tabela/nome?id_tabela=${idTabela}`;
+const url = `/tabela/nome?id_numerico=${idTabela}`;
 
 // Realiza uma requisição para obter dados da tabela.
 fetch(url)
@@ -36,7 +36,7 @@ function enviarTicket() {
     var email = localStorage.getItem('email');
     var motivo = localStorage.getItem('motivo');
 
-    const body = `nome|${nome}\nemail|${email}\nmotivo|${motivo}\nid_tabela|${idTabela}\nupdate_query|${updateQuery}\nstatus|pendente\nresumo|${resumo}`;
+    const body = `nome|${nome}\nemail|${email}\nmotivo|${motivo}\nid_numerico|${idTabela}\nupdate_query|${updateQuery}\nstatus|pendente\nresumo|${resumo}`;
 
     fetch('/ticket/solicitacao', {
         // Define o método, tipo de conteúdo e as informações a serem enviadas.
