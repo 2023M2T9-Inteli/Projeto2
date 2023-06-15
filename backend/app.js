@@ -55,31 +55,31 @@ app.get('/pesquisa', (req, res) => {
         .join(' OR ');
 
     let sql = `SELECT 
-      cat_dados_tabela.*, cat_dados_owner.*, cat_dados_conexoes.*, REPLACE(cat_dados_variaveis.campos_variaveis, ',', ' ') as campos_variaveis,
-      cat_dados_variaveis_estrangeiro.campo_estrangeiro, feedback.classificacao_admin_feedback, feedback.qtd_like_colaborador_feedback
-    FROM 
-      cat_dados_tabela
-      INNER JOIN feedback ON cat_dados_tabela.id_tabela = feedback.id_feedback
-      INNER JOIN cat_dados_owner ON cat_dados_tabela.conjunto_de_dados = cat_dados_owner.conjunto_de_dados
-      INNER JOIN cat_dados_conexoes ON cat_dados_tabela.id_tabela = cat_dados_conexoes.id_numero_conexoes
-      INNER JOIN (
-        SELECT 
-          cat_dados_variaveis.id_tabela_estrangeira, GROUP_CONCAT(nome_tabela || ' ' || nome_campo || ' ' || tipo_campo || ' ' || tipo_pessoa || ' ' || descricao_campo) as campos_variaveis
-        FROM 
-          cat_dados_variaveis
-        GROUP BY 
-          cat_dados_variaveis.id_tabela_estrangeira      
-      ) AS cat_dados_variaveis ON cat_dados_tabela.id_tabela = cat_dados_variaveis.id_tabela_estrangeira
-      LEFT JOIN (
-        SELECT 
-          cat_dados_variaveis.id_tabela_estrangeira, cat_dados_variaveis.nome_campo AS campo_estrangeiro
-        FROM 
-          cat_dados_tabela 
-          JOIN cat_dados_owner ON cat_dados_tabela.id_owner = cat_dados_owner.id_owner 
-          JOIN cat_dados_conexoes ON cat_dados_tabela.id_numero_conexoes = cat_dados_conexoes.id_numero_conexoes
-          LEFT JOIN cat_dados_variaveis ON cat_dados_variaveis.id_tabela_estrangeira = cat_dados_tabela.id_tabela
-            AND cat_dados_variaveis.ch_primaria = "S"
-      ) AS cat_dados_variaveis_estrangeiro ON cat_dados_tabela.id_tabela = cat_dados_variaveis_estrangeiro.id_tabela_estrangeira`;
+    cat_dados_tabela.*, cat_dados_owner.*, cat_dados_conexoes.*, REPLACE(cat_dados_variaveis.campos_variaveis, ',', ' ') as campos_variaveis,
+    cat_dados_variaveis.campo_estrangeiro, feedback.classificacao_admin, feedback.qtd_like_colaborador
+  FROM 
+    cat_dados_tabela
+    INNER JOIN feedback ON cat_dados_tabela.id_numerico = feedback.id_numerico
+    INNER JOIN cat_dados_owner ON cat_dados_tabela.conjunto_de_dados = cat_dados_owner.conjunto_de_dados
+    INNER JOIN cat_dados_conexoes ON cat_dados_tabela.id_tabela = cat_dados_conexoes.id_tabela
+    INNER JOIN (
+      SELECT 
+        cat_dados_variaveis.id_tabela, GROUP_CONCAT(nome_tabela || ' ' || nome_campo || ' ' || tipo_campo || ' ' || tipo_pessoa || ' ' || descricao_campo) as campos_variaveis
+      FROM 
+        cat_dados_variaveis
+      GROUP BY 
+        cat_dados_variaveis.id_tabela      
+    ) AS cat_dados_variaveis ON cat_dados_tabela.id_tabela = cat_dados_variaveis.id_tabela
+    LEFT JOIN (
+      SELECT 
+        cat_dados_variaveis.id_tabela, cat_dados_variaveis.nome_campo AS campo_estrangeiro
+      FROM 
+        cat_dados_tabela 
+        JOIN cat_dados_owner ON cat_dados_tabela.conjunto_de_dados = cat_dados_owner.conjunto_de_dados
+        JOIN cat_dados_conexoes ON cat_dados_tabela.id_tabela = cat_dados_conexoes.id_tabela
+        LEFT JOIN cat_dados_variaveis ON cat_dados_variaveis.id_tabela = cat_dados_tabela.id_tabela
+          AND cat_dados_variaveis.ch_primaria = "S"
+    ) AS cat_dados_variaveis ON cat_dados_tabela.id_tabela = cat_dados_variaveis.id_tabela`;
 
     const params = [...termosLike, ...termosLike, ...termosLike, ...termosLike];
 
@@ -137,7 +137,7 @@ FROM
     cat_dados_tabela 
     JOIN cat_dados_owner ON cat_dados_tabela.id_owner = cat_dados_owner.id_owner 
     JOIN cat_dados_conexoes ON cat_dados_tabela.id_numero_conexoes = cat_dados_conexoes.id_numero_conexoes
-    LEFT JOIN cat_dados_variaveis ON cat_dados_variaveis.id_tabela_estrangeira = cat_dados_tabela.id_tabela
+    LEFT JOIN cat_dados_variaveis ON cat_dados_variaveis.id_tabela = cat_dados_tabela.id_tabela
                                    AND cat_dados_variaveis.ch_primaria = "S"
 WHERE cat_dados_tabela.id_tabela = ?`;
 
@@ -156,7 +156,7 @@ WHERE cat_dados_tabela.id_tabela = ?`;
 app.get('/campos', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
-    sql = "SELECT cat_dados_variaveis.id_variaveis, cat_dados_variaveis.nome_tabela, cat_dados_variaveis.nome_campo, cat_dados_variaveis.tipo_campo,  cat_dados_variaveis.tipo_pessoa, cat_dados_variaveis.descricao_campo, cat_dados_variaveis.ch_primaria, cat_dados_variaveis.null_campo, cat_dados_variaveis.unq, cat_dados_variaveis.volatil, cat_dados_variaveis.lgpd, cat_dados_variaveis.amostra_campo FROM cat_dados_variaveis JOIN cat_dados_tabela ON cat_dados_variaveis.id_tabela_estrangeira = cat_dados_tabela.id_tabela WHERE id_tabela_estrangeira=" + req.query.id_tabela_estrangeira;
+    sql = "SELECT cat_dados_variaveis.id_variaveis, cat_dados_variaveis.nome_tabela, cat_dados_variaveis.nome_campo, cat_dados_variaveis.tipo_campo,  cat_dados_variaveis.tipo_pessoa, cat_dados_variaveis.descricao_campo, cat_dados_variaveis.ch_primaria, cat_dados_variaveis.null_campo, cat_dados_variaveis.unq, cat_dados_variaveis.volatil, cat_dados_variaveis.lgpd, cat_dados_variaveis.amostra_campo FROM cat_dados_variaveis JOIN cat_dados_tabela ON cat_dados_variaveis.id_tabela = cat_dados_tabela.id_tabela WHERE id_numerico=" + req.query.id_numerico;
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     db.all(sql, [], (err, rows) => {
         if (err) {
@@ -171,7 +171,7 @@ app.get('/campos', (req, res) => {
 app.get('/tabela/nome', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
-    var sql = "SELECT nome_tabela FROM cat_dados_tabela WHERE id_tabela=" + req.query.id_tabela;
+    var sql = "SELECT nome_tabela FROM cat_dados_tabela WHERE id_numerico=" + req.query.id_numerico;
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     db.all(sql, [], (err, rows) => {
         if (err) {
