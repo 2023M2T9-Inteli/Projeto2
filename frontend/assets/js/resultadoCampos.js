@@ -18,13 +18,13 @@ function mudarTelaGeral() {
     
     // Obtém o parâmetro 'id_tabela' da URL atual
     const urlParams = new URLSearchParams(window.location.search);
-    const idTabela = urlParams.get('id_tabela');
+    const idTabela = urlParams.get('id_numerico');
     
     // Codifica o valor do parâmetro 'id_tabela' para uso na URL
     const encodedIdTabela = encodeURIComponent(idTabela);
     
     // Atualiza o valor do atributo 'href' para redirecionar para a página 'resultado.html' com o parâmetro 'id_tabela'
-    hrefGeral = `/resultado.html?id_tabela=${encodedIdTabela}&admin=${Admin}`;
+    hrefGeral = `/resultado.html?id_numerico=${encodedIdTabela}&admin=${Admin}`;
   
     // Redireciona o usuário para a página 'resultado.html'
     window.location.href = hrefGeral;
@@ -40,13 +40,13 @@ function mudarTelaTabela() {
 
     // Obtém o parâmetro 'id_tabela' da URL atual
     const urlParams = new URLSearchParams(window.location.search);
-    const idTabela = urlParams.get('id_tabela');
+    const idTabela = urlParams.get('id_numerico');
     
     // Codifica o valor do parâmetro 'id_tabela' para uso na URL
     const encodedIdTabela = encodeURIComponent(idTabela);
 
     // Atualiza o valor do atributo 'href' para redirecionar para a página 'tabela.html' com o parâmetro 'id_tabela'.
-    hrefCampos = `/campos.html?id_tabela=${encodedIdTabela}&admin=${Admin}`;
+    hrefCampos = `/campos.html?id_numerico=${encodedIdTabela}&admin=${Admin}`;
 
     // Redireciona o usuário para a página 'tabela.html'.
     window.location.href = hrefCampos;
@@ -56,13 +56,13 @@ function mudarTelaTabela() {
 function solicitarTicket() {
     // Obtém o parâmetro 'id_tabela' da URL atual.
     const urlParams = new URLSearchParams(window.location.search);
-    const idTabela = urlParams.get('id_tabela');
+    const idTabela = urlParams.get('id_numerico');
     
     // Codifica o valor do parâmetro 'id_tabela' para uso na URL.
     const encodedIdTabela = encodeURIComponent(idTabela);
 
     // Define a URL da página 'ticketPessoa.html' com o parâmetro 'id_tabela'.
-    href = `/ticketPessoa.html?id_tabela=${encodedIdTabela}&admin=${Admin}`
+    href = `/ticketPessoa.html?id_numerico=${encodedIdTabela}&admin=${Admin}`
 
     // Redireciona o usuário para a URL definida na variável href.
     window.location.href = href;

@@ -126,23 +126,12 @@ app.get('/resultado', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
 
-    const idTabela = req.query.id_tabela;
+    const idNumerico = req.query.id_numerico;
 
-    const sql = `SELECT 
-    cat_dados_tabela.*, 
-    cat_dados_owner.*, 
-    cat_dados_conexoes.*, 
-    cat_dados_variaveis.nome_campo AS campo_estrangeiro
-FROM 
-    cat_dados_tabela 
-    JOIN cat_dados_owner ON cat_dados_tabela.id_owner = cat_dados_owner.id_owner 
-    JOIN cat_dados_conexoes ON cat_dados_tabela.id_numero_conexoes = cat_dados_conexoes.id_numero_conexoes
-    LEFT JOIN cat_dados_variaveis ON cat_dados_variaveis.id_tabela = cat_dados_tabela.id_tabela
-                                   AND cat_dados_variaveis.ch_primaria = "S"
-WHERE cat_dados_tabela.id_tabela = ?`;
+    const sql = `SELECT * FROM cat_dados_tabela JOIN cat_dados_owner ON cat_dados_tabela.conjunto_de_dados = cat_dados_owner.conjunto_de_dados JOIN cat_dados_conexoes ON cat_dados_tabela.id_tabela = cat_dados_conexoes.id_tabela WHERE cat_dados_tabela.id_numerico = ${idNumerico}` ;
 
     var db = new sqlite3.Database(DBPATH); // Abre o banco
-    db.all(sql, [idTabela], (err, rows) => {
+    db.all(sql, [], (err, rows) => {
         if (err) {
             throw err;
         }
@@ -156,7 +145,7 @@ WHERE cat_dados_tabela.id_tabela = ?`;
 app.get('/campos', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
-    sql = "SELECT cat_dados_variaveis.id_variaveis, cat_dados_variaveis.nome_tabela, cat_dados_variaveis.nome_campo, cat_dados_variaveis.tipo_campo,  cat_dados_variaveis.tipo_pessoa, cat_dados_variaveis.descricao_campo, cat_dados_variaveis.ch_primaria, cat_dados_variaveis.null_campo, cat_dados_variaveis.unq, cat_dados_variaveis.volatil, cat_dados_variaveis.lgpd, cat_dados_variaveis.amostra_campo FROM cat_dados_variaveis JOIN cat_dados_tabela ON cat_dados_variaveis.id_tabela = cat_dados_tabela.id_tabela WHERE id_numerico=" + req.query.id_numerico;
+    sql = "SELECT cat_dados_variaveis.nome_tabela, cat_dados_variaveis.nome_campo, cat_dados_variaveis.tipo_campo,  cat_dados_variaveis.tipo_pessoa, cat_dados_variaveis.descricao_campo, cat_dados_variaveis.ch_primaria, cat_dados_variaveis.null_campo, cat_dados_variaveis.unq, cat_dados_variaveis.volatil, cat_dados_variaveis.lgpd, cat_dados_variaveis.amostra_campo FROM cat_dados_variaveis JOIN cat_dados_tabela ON cat_dados_variaveis.id_tabela = cat_dados_tabela.id_tabela WHERE id_numerico=" + req.query.id_numerico;
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     db.all(sql, [], (err, rows) => {
         if (err) {
@@ -199,10 +188,10 @@ app.post('/ticket/solicitacao', (req, res) => {
     }, {});
 
     // Extrai os valores individuais
-    const { nome, email, motivo, id_tabela, update_query, status, resumo} = values;
+    const { nome, email, motivo, id_numerico, update_query, status, resumo} = values;
 
     // Executa a lógica de atualização no banco de dados
-    const sql = `INSERT INTO ticket (nome, email, motivo, id_tabela, update_query, status, resumo) VALUES ('${nome}', '${email}', '${motivo}', '${id_tabela}', '${update_query.replace(/'/g, "''")}', '${status}', '${resumo}')`;
+    const sql = `INSERT INTO ticket (nome, email, motivo, id_numerico, update_query, status, resumo) VALUES ('${nome}', '${email}', '${motivo}', '${id_numerico}', '${update_query.replace(/'/g, "''")}', '${status}', '${resumo}')`;
 
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     db.run(sql, [], function (err) {
@@ -220,7 +209,7 @@ app.post('/ticket/solicitacao', (req, res) => {
 app.get('/ticket/pendente', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
-    sql = "SELECT * FROM ticket JOIN cat_dados_tabela ON ticket.id_tabela = cat_dados_tabela.id_tabela WHERE status = 'pendente'";
+    sql = "SELECT * FROM ticket JOIN cat_dados_tabela ON ticket.id_numerico = cat_dados_tabela.id_numerico WHERE status = 'pendente'";
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     db.all(sql, [], (err, rows) => {
         if (err) {
