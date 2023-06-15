@@ -1,0 +1,31 @@
+.content {
+    padding: 1.5rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 20px;
+    margin-top: 1rem;
+}
+
+html {
+    background: var(--color-white);
+}
+
+body {
+    min-height: 100vh;
+}
+
+main {
+    width: 90%;
+    margin: auto;
+}
+
+#tituloTabela{
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 1rem;
+    border: none;
+    outline: 0;
+    color: var(--color-primary);
+}

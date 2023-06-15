@@ -1,0 +1,51 @@
+html {
+  background: var(--color-white);
+}
+
+main {
+  width: 90%;
+  margin: auto;
+}
+
+/* blocos de conteúdo */
+.content {
+  padding: 1rem;
+  border: 1px solid var(--color-primary);
+  border-radius: 20px;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+h2 {
+  text-align: center;
+}
+
+.content p {
+  margin-bottom: 0.3rem;
+}
+
+.geral {
+  padding-bottom: 1rem;
+}
+
+.containerJustificado {
+  display: flex;
+  justify-content: space-between;
+}
+
+.data-responsible,
+.availability-and-update {
+  flex-grow: 1;
+}
+
+/* Rodapé */
+footer {
+  padding-bottom: .5rem;
+  text-align: center;
+}
+
+footer a {
+  cursor: pointer;
+  color: var(--color-primary) !important;
+}

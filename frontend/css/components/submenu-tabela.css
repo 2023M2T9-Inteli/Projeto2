@@ -1,0 +1,141 @@
+:root {
+  --font-size-small: 18px;
+  --font-size-medium: 20px;
+  --font-size-large: 22px;
+
+  --font-family: 'Poppins', sans-serif;
+
+  --color-primary: #07B2FD;
+  --color-white: #FFFFFF;
+  --color-grey-dark: #3A404A;
+  --color-grey-light: #424750;
+
+  --spacing-small: 8px;
+  --spacing-medium: 16px;
+  --spacing-large: 24px;
+}
+
+#tituloTabela {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.container-submenu {
+  height: 15vh;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.container-submenu .feedback {
+  display: flex;
+  align-items: baseline;
+}
+
+.container-submenu .feedback button {
+  color: var(--color-grey-dark);
+  background: transparent;
+  margin-left: 1rem;
+  border: none;
+}
+
+.container-submenu .general {
+  justify-self: center;
+  justify-content: space-between;
+  min-width: 13%;
+  position: absolute;
+  padding-top: .4rem;
+  padding-bottom: .4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 10px;
+  flex-grow: 1;
+  background-color: transparent;
+  color: var(--color-grey-dark);
+  outline: 0;
+  display: flex;
+  cursor: pointer;
+  -webkit-box-shadow: 2px 6px 10px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 6px 10px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 6px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+.container-submenu .general p {
+  margin-bottom: 0;
+
+}
+
+.general a {
+  text-decoration: none;
+}
+
+.active p {
+  color: var(--color-primary);
+}
+
+.container-submenu .access {
+  justify-self: end;
+}
+
+.container-submenu .access .btn {
+  background: var(--color-white);
+  border-radius: 20px;
+  color: var(--color-white);
+  border-color: #07B2FD;
+}
+
+.container-submenu .access .btn:hover {
+  background: var(--color-primary);
+  transition: .4s ease-in;
+}
+
+.container-submenu .access .btn p {
+  margin: 0;
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-small);
+}
+
+.rate {
+  float: left;
+  height: 46px;
+  padding: 0 10px;
+}
+
+.rate:not(:checked)>input {
+  position: absolute;
+  top: -9999px;
+}
+
+.rate:not(:checked)>label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 30px;
+  color: #ccc;
+}
+
+.rate:not(:checked)>label:before {
+  content: '★ ';
+}
+
+.rate>input:checked~label {
+  color: #ffc700;
+}
+
+.rate:not(:checked)>label:hover,
+.rate:not(:checked)>label:hover~label {
+  color: #deb217;
+}
+
+.rate>input:checked+label:hover,
+.rate>input:checked+label:hover~label,
+.rate>input:checked~label:hover,
+.rate>input:checked~label:hover~label,
+.rate>label:hover~input:checked~label {
+  color: #c59b08;
+}

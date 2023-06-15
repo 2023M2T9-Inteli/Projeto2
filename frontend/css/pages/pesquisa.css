@@ -1,0 +1,85 @@
+@import url("../root.css");
+
+html {
+    background: var(--color-white);
+}
+
+body {
+    min-height: 100vh;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+textarea:focus,
+input:focus,
+select:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+}
+
+.pesquisaInput {
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 25px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.pesquisaInput i {
+    color: var(--color-primary);
+}
+
+.filter-i {
+    color: var(--color-grey-dark);
+}
+
+.textPesquisa {
+    font-family: var(--font-family);
+    color: var(--color-grey-dark);
+}
+
+input[type="text"] {
+    margin-left: 1rem;
+    border: none;
+    background-color: transparent;
+    flex-grow: 1;
+    font-size: 16px;
+}
+
+button[type="submit"] {
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 20px;
+    margin-left: 10px;
+}
+
+#resultados {
+    width: 80%;
+    margin: auto;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    color: var(--color-grey-dark);
+}
+
+.area_resultados {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 20px;
+}
+
+.area_resultados:hover {
+    cursor: pointer;
+    background: var(--color-primary-click);
+    transition: .5s ease-in;
+}

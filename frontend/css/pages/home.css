@@ -1,0 +1,77 @@
+main {
+    height: 90vh;
+    display: flex;
+}
+
+main h1 {
+    text-align: center;
+    color: var(--color-primary);
+    font-size: var(--font-size-mega);
+}
+
+.search {
+    margin: auto;
+    width: 60%;
+    align-items: center;
+    justify-items: center;
+}
+
+.search i{
+    cursor: pointer;
+}
+
+.pesquisaInput {
+    padding: 1rem 1.5rem;
+    border: 1px solid #07B2FD;
+    width: 100%;
+    border-radius: 200px;
+    display: flex;
+    margin-right: auto;
+    display: inline-block;
+}
+
+.pesquisaInput i {
+    color: var(--color-primary);
+}
+
+input[type="text"] {
+    margin-left: 0.7rem;
+    border: none;
+    background-color: transparent;
+    flex-grow: 100%;
+    width: 90%;
+    outline: none;
+    font-size: 20px;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--color-white);
+    overflow: hidden;
+    height: 100vh;
+
+
+}
+
+.textPesquisa {
+    font-family: var(--font-family);
+    color: var(--color-grey-dark);
+}
+
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding-right: 15px;
+    /* Compensação para evitar que o conteúdo seja cortado */
+}
+
+/* Estilos adicionais para tornar o conteúdo dentro do container responsivo */
+.inner-content {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    /* ... outros estilos ... */
+}
