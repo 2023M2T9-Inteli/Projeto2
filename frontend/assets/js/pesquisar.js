@@ -124,7 +124,7 @@ function pesquisa() {
 
                     function exibirInformacoesTabela(resultado) {
                         // Redirecionar para a página com as informações detalhadas da tabela
-                        window.location.href = `resultado.html?id_tabela=${resultado.id_tabela}&admin=${admin}`;
+                        window.location.href = `resultado.html?id_numerico=${resultado.id_numerico}&admin=${admin}`;
                     }
 
                     resultadosDiv.appendChild(resultadoDiv);
