@@ -222,6 +222,66 @@ app.post('/ticket/aprovar', urlencodedParser, (req, res) => {
 	res.end();
 });
 
+app.get('/estrelinhas', (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    sql = "SELECT id_numerico, classificacao_admin FROM feedback ORDER BY id_numerico";
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        res.json(rows);
+    });
+    // Fecha o banco
+    db.close();
+});
+
+app.get('/estrelinhas/:id', (req, res) => {
+    const idClassification = req.params.id;
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    sql = `SELECT classificacao_admin FROM feedback WHERE id_numerico = ${idClassification}`;
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        res.json(rows);
+    });
+    // Fecha o banco
+    db.close();
+});
+
+app.post('/classificar', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); 
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	sql = `INSERT INTO feedback VALUES (${req.body.id_numerico}, 0, ${req.body.classificacao_admin});`;
+	console.log(sql);
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}	
+	});
+	db.close(); // Fecha o banco
+	res.end();
+});
+
+app.put('/attclassificacao', urlencodedParser, (req, res) => {
+	res.statusCode = 200;
+	res.setHeader('Access-Control-Allow-Origin', '*'); 
+	var db = new sqlite3.Database(DBPATH); // Abre o banco
+	sql = `UPDATE feedback SET classificacao_admin = ${req.body.classificacao_admin} WHERE id_numerico = ${req.body.id_numerico};`;
+	console.log(sql);
+	db.run(sql, [],  err => {
+		if (err) {
+		    throw err;
+		}	
+	});
+	db.close(); // Fecha o banco
+	res.end();
+});
 
 // Inicialização do servidor web na porta e hostname definidos anteriormente
 app.listen(port, hostname, () => {
