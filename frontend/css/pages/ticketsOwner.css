@@ -4,7 +4,7 @@ html {
 }
 /* define a altura mínima do body como 100% da altura da tela */
 body {
-    background-color: var(--color-white);
+    min-height: 100vh;
 }
 /* define a largura de 90% e centraliza a main */
 main {
