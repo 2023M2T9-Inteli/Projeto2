@@ -5,7 +5,7 @@ Projeto 2
 - <a href="https://www.linkedin.com/in/ivan-ferreira-4270ab263/">Ivan Ferreira</a>
 - <a href="https://www.linkedin.com/in/lidia-mariano-b68282264/">Lídia Cruz Mariano</a>
 - <a href="https://www.linkedin.com/in/mateus-marçal-212953264/">Mateus Gois</a> 
-- <a>Matthias Guernet</a>
+- <a href="https://inteli-college.slack.com/archives/D057AGQ9S22/p1687181113336709">Matthias Guernet</a>
 - <a href="https://www.linkedin.com/in/nicollas-isaac/">Nicollas Isaac</a> 
 - <a href="https://www.linkedin.com/in/raissa-vieira-de-melo/">Raissa Vieira de Melo</a> 
 ## 📝 Descrição
