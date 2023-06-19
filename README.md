@@ -12,7 +12,9 @@ Projeto 2 - Pan Tera
   
 ## 📝 Descrição
 
-Atualmente o Catálogo de Dados da empresa, chamado PanPedia, possui uma interface com usabilidade pouco amigável e apresenta limitação na evolução de funcionalidades mínimas, como por exemplo, não oferece nenhuma ferramenta com a função de solicitação de alteração ou de classificação de dados. 
+Atualmente o Catálogo de Dados da empresa, chamado PanPedia, possui uma interface com usabilidade pouco amigável e apresenta limitação na evolução de funcionalidades mínimas, como por exemplo, não oferece nenhuma ferramenta com a função de solicitação de alteração ou de classificação de dados. O Pan Tera é um grupo de profissionais dedicados a melhorar a experiência do usuário e a funcionalidade do Catálogo de Dados do Banco Pan, conhecido como PanPedia. Atualmente, o PanPedia enfrenta desafios significativos, como uma interface pouco amigável e limitações na evolução de funcionalidades essenciais.
+Nossa missão é revitalizar o PanPedia, transformando-o em uma ferramenta eficiente, intuitiva e poderosa para a gestão de dados. 
+Nosso principal objetivo é melhorar a usabilidade do PanPedia, tornando-o mais acessível e amigável aos usuários. Para isso, iremos desenvolver uma nova plataforma que promova uma navegação intuitiva, simplificando a busca, classificação e solicitação de alteração de dados. O novo PanPedia será uma ferramenta versátil, fornecendo recursos avançados para otimizar o fluxo de trabalho e a colaboração entre as equipes.
 
 ## 👩‍🏫 Professores
 - <a href="">Claudio Andre</a>
