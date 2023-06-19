@@ -1,17 +1,25 @@
 # Projeto2
-Projeto 2
-#Integrantes
+Projeto 2 - Pan Tera
+
+## Integrantes
 - <a href="https://www.linkedin.com/in/henrique-cox-4644bb270/">Herique Cox</a>
 - <a href="https://www.linkedin.com/in/ivan-ferreira-4270ab263/">Ivan Ferreira</a>
 - <a href="https://www.linkedin.com/in/lidia-mariano-b68282264/">Lídia Cruz Mariano</a>
 - <a href="https://www.linkedin.com/in/mateus-marçal-212953264/">Mateus Gois</a> 
 - <a href="https://www.linkedin.com/in/matthias-guernet-792270278/">Matthias Guernet</a>
 - <a href="https://www.linkedin.com/in/nicollas-isaac/">Nicollas Isaac</a> 
-- <a href="https://www.linkedin.com/in/raissa-vieira-de-melo/">Raissa Vieira de Melo</a> 
+- <a href="https://www.linkedin.com/in/raissa-vieira-de-melo/">Raissa Vieira de Melo</a>
+  
 ## 📝 Descrição
 
 Atualmente o Catálogo de Dados da empresa, chamado PanPedia, possui uma interface com usabilidade pouco amigável e apresenta limitação na evolução de funcionalidades mínimas, como por exemplo, não oferece nenhuma ferramenta com a função de solicitação de alteração ou de classificação de dados. 
 
+## 👩‍🏫 Professores
+- <a href="">Claudio Andre</a>
+- <a href="">Fatima Toledo</a>
+- <a href="">Flavio Marques Azevedo</a>
+- <a href="">Francisco Escobar</a> 
+- <a href="">Henrique Paiva</a> 
 
 ## 📁 Estrutura de pastas
 
