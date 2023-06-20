@@ -69,56 +69,6 @@ function solicitarTicket() {
     window.location.href = href;
 }
 
-var ivanzin;
-const urlClassification = '/estrelinhas/' + id_numerico;
-
-/*const isThereClassification = () => {
-    fetch(urlClassification)
-        .then((response) => response.json())
-        .then((data) => {
-            ivanzin = data[0].classificacao_admin;
-            console.log(ivanzin);
-        })
-        .catch((error) => {
-            // Trata o erro
-            console.error('Ocorreu um erro na requisição:', error);
-            ivanzin = null;
-            console.log(ivanzin);
-        });
-}*/
-
-const getPreviousClassification = async () => {
-    const previousCLassification = await fetch(urlClassification);
-    const jsonclassification = await previousCLassification.json();
-    if (jsonclassification[0].classificacao_admin == 1) {
-        document.getElementById('star1').checked = true;
-    } else if (jsonclassification[0].classificacao_admin == 2) {
-        document.getElementById('star2').checked = true;
-    } else if (jsonclassification[0].classificacao_admin == 3) {
-        document.getElementById('star3').checked = true;
-    } else if (jsonclassification[0].classificacao_admin == 4) {
-        document.getElementById('star4').checked = true;
-    } else if (jsonclassification[0].classificacao_admin == 5) {
-        document.getElementById('star5').checked = true;
-    }
-}
-getPreviousClassification();
-
-const isThereClassification = async () => {
-    const response = await fetch(urlClassification);
-    const json = await response.json();
-    console.log(json);
-    ivanzin = json[0].classificacao_admin;
-    console.log(ivanzin);
-}
-
-isThereClassification();
-
-//log pra verificar as chamadas assíncronas
-console.log('depois do primeiro isthereclassification');
-
-
-
 // Altera funcionalidades(classificação em estrelas e botão de solicitar acesso) na página de resultados de acordo com o valor do parâmetro admin 
 if (Admin == "nao" || !Admin) {
     // se for igual a 'nao' ou se for nulo, altera o conteúdo do elemento divFeedback para mostrar a funcionalidade de like/dislike
@@ -150,96 +100,75 @@ if (Admin == "nao" || !Admin) {
     document.getElementById("divSolicitarAcesso").style.display = "none";
 }
 
-const insertOrUpdate = (endpoint, metodo, starValue) => {
-    const body = `id_numerico=${id_numerico}&classificacao_admin=${starValue}`;
-    fetch(endpoint, {
-        method: metodo,
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: body
-    })
-        .catch(err => console.log(err));
-}
+/* Declaração da variável qtdEstrelas, que guarda a quantidade de estrelas da tabela */
+var qtdEstrelas;
 
+/* Definição da variável urlClassificacao, referente ao endpoint de SELECT da quantidade de estrelas da tabela */
+const urlClassificacao = '/estrelinhas/' + id_numerico;
+
+/* Definições das variáveis referentes aos inputs das estrelinhas */
 const star1 = document.getElementById('star1');
 const star2 = document.getElementById('star2');
 const star3 = document.getElementById('star3');
 const star4 = document.getElementById('star4');
 const star5 = document.getElementById('star5');
 
-/* Depois tentarei reduzir o código ao criar algumas funções para essas partes que se repetem */
-star1.addEventListener('click', () => {
-    isThereClassification();
-    if (ivanzin == null || ivanzin == undefined) {
-        insertOrUpdate('/classificar', 'POST', 1);
-        isThereClassification();
-    } else {
-        insertOrUpdate('/attclassificacao', 'PUT', 1);
+/* Definição da função que verifica se existe uma classificação anterior referente à tabela e, de acordo com isso, preenche as estrelinhas */
+const verificarClassificacaoAnterior = async () => {
+    const classificacaoAnterior = await fetch(urlClassificacao);
+    const classificacaoJson = await classificacaoAnterior.json();
+
+    switch (classificacaoJson[0].classificacao_admin) {
+        case 1:
+            star1.checked = true;
+            break;
+        case 2:
+            star2.checked = true;
+            break;
+        case 3:
+            star3.checked = true;
+            break;
+        case 4:
+            star4.checked = true;
+            break;
+        case 5:
+            star5.checked = true;
+            break;
     }
-});
+}
+verificarClassificacaoAnterior();
 
-star2.addEventListener('click', () => {
-    isThereClassification();
-    if (ivanzin == null || ivanzin == undefined) {
-        insertOrUpdate('/classificar', 'POST', 2);
-        isThereClassification();
-    } else {
-        insertOrUpdate('/attclassificacao', 'PUT', 2);
-    }
-});
+/* Definição da função que verifica se existe uma classificação anterior referente à tabela e atribui o valor na variável qtdEstrelas */
+const pegarClassificacaoAnterior = async () => {
+    const response = await fetch(urlClassificacao);
+    const json = await response.json();
+    console.log(json);
+    qtdEstrelas = json[0].classificacao_admin;
+    console.log(qtdEstrelas);
+}
+pegarClassificacaoAnterior();
 
-star3.addEventListener('click', () => {
-    isThereClassification();
-    if (ivanzin == null || ivanzin == undefined) {
-        insertOrUpdate('/classificar', 'POST', 3);
-        isThereClassification();
-    } else {
-        insertOrUpdate('/attclassificacao', 'PUT', 3);
-    }
-});
+/* Definição da função que realiza uma requisição PUT para realizar o UPDATE conforme o valor de qtdEstrelas */
+const atualizarClassificacao = (starValue) => {
+    const body = `id_numerico=${id_numerico}&classificacao_admin=${starValue}`;
+    fetch('/attclassificacao', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body
+    })
+        .catch(err => console.log(err));
+}
 
-star4.addEventListener('click', () => {
-    isThereClassification();
-    if (ivanzin == null || ivanzin == undefined) {
-        insertOrUpdate('/classificar', 'POST', 4);
-        isThereClassification();
-    } else {
-        insertOrUpdate('/attclassificacao', 'PUT', 4);
-    }
-});
+/* Definição da função que cria um event listener de click para as estrelinhas */
+const iniciarListener = (star, value) => {
+    star.addEventListener('click', () => {
+        pegarClassificacaoAnterior();
+        atualizarClassificacao(value);
+    });
+};
 
-star5.addEventListener('click', () => {
-    isThereClassification();
-    if (ivanzin == null || ivanzin == undefined) {
-        insertOrUpdate('/classificar', 'POST', 5);
-        isThereClassification();
-    } else {
-        insertOrUpdate('/attclassificacao', 'PUT', 5);
-    }
-});
-
-
-/* Manter essa parte do código para eu substituir os if's por switch-case caso a funcionalidade dê certo */
-/*
-switch (ivanzin) {
-    case 1:
-        star1.checked = true;
-        console.log('eh 1');
-        break;
-    case 2:
-        star2.checked = true;
-        console.log('eh 2');
-        break;
-    case 3:
-        star3.checked = true;
-        console.log('eh 3');
-        break;
-    case 4:
-        star4.checked = true;
-        console.log('eh 4');
-        break;
-    case 5:
-        star5.checked = true;
-        console.log('eh 5');
-        break;
-}*/
-
+iniciarListener(star1, 1);
+iniciarListener(star2, 2);
+iniciarListener(star3, 3);
+iniciarListener(star4, 4);
+iniciarListener(star5, 5);
