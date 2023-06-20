@@ -3,6 +3,26 @@ const admin = new URL(window.location.href).searchParams.get("admin");
 const selectors = ['form', '#pesquisa', '#resultados', '#selectConjuntoDeDados', '#selectDadosSensiveis', '#selectOwner', '#selectSteward'];
 const [formulario, campoPesquisa, resultadosDiv, selectConjunto, selectDadosSensiveis, selectOwner, selectSteward] = selectors.map(s => document.querySelector(s));
 
+const botaoVoltarPagina = document.getElementById('botaoVoltarPagina');
+const botaoAvancarPagina = document.getElementById('botaoAvancarPagina');
+const paginaAtualSpan = document.getElementById('paginaAtual');
+let paginaAtual = 1;
+
+botaoVoltarPagina.addEventListener('click', () => {
+    if (paginaAtual > 1) { // Verifica se já estamos na primeira página
+        paginaAtual--;
+        pesquisa(paginaAtual);
+        paginaAtualSpan.textContent = paginaAtual; // Adicione esta linha
+    }
+});
+
+botaoAvancarPagina.addEventListener('click', () => {
+    paginaAtual++;
+    pesquisa(paginaAtual);
+    paginaAtualSpan.textContent = paginaAtual; // Adicione esta linha
+});
+
+
 let ordenarBtn = true;
 
 formulario.addEventListener('submit', (event) => {
@@ -63,7 +83,8 @@ const pesquisa = () => {
     const { admin, conjuntoDeDados, dadosSensiveis, owner, steward, ordem } = Object.fromEntries(urlParams.entries());
 
     let url = `/pesquisa?termo=${termoPesquisa}&admin=${admin}${conjuntoDeDados ? `&conjuntoDeDados=${conjuntoDeDados}` : ''}${dadosSensiveis ? `&dadosSensiveis=${dadosSensiveis}` : ''
-        }${owner ? `&owner=${owner}` : ''}${steward ? `&steward=${steward}` : ''}${ordem ? `&ordem=${ordem}` : ''}`;
+        }${owner ? `&owner=${owner}` : ''}${steward ? `&steward=${steward}` : ''}${ordem ? `&ordem=${ordem}` : ''}&pagina=${paginaAtual}`;
+
 
     fetch(url)
         .then((response) => response.json())
@@ -84,6 +105,7 @@ const pesquisa = () => {
                     divResultado.addEventListener('click', () => (window.location.href = `resultado.html?id_numerico=${id_numerico}&admin=${admin}`));
                     novaDiv.appendChild(divResultado);
                 }
+                paginaAtualSpan.textContent = paginaAtual;
             });
             document.body.appendChild(novaDiv);
         });
