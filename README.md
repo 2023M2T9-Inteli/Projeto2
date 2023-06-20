@@ -59,7 +59,7 @@ Isso instalará todas as dependências definidas no arquivo <b>package.json</b> 
 ```sh
 npm start
 ```
-5. Agora você pode acessar a aplicação através do link http://localhost:127.0.0.1/
+5. Agora você pode acessar a aplicação através do link http://localhost:127.0.0.1/ segurando o botão "ctrl" e clicando com o botão esquedo do mouse ou touch pad;
 6. O servidor está online.
 
 ## 🗃 Histórico de lançamentos
