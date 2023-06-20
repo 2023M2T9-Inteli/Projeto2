@@ -229,10 +229,10 @@ app.post('/ticket/aprovar', urlencodedParser, (req, res) => {
 });
 
 app.get('/estrelinhas/:id', (req, res) => {
-    const idClassification = req.params.id;
+    const idClassificacao = req.params.id;
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
-    sql = `SELECT classificacao_admin FROM feedback WHERE id_numerico = ${idClassification}`;
+    sql = `SELECT classificacao_admin FROM feedback WHERE id_numerico = ${idClassificacao}`;
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     db.all(sql, [], (err, rows) => {
         if (err) {
@@ -244,11 +244,42 @@ app.get('/estrelinhas/:id', (req, res) => {
     db.close();
 });
 
-app.put('/attclassificacao', urlencodedParser, (req, res) => {
+app.put('/attClassificacao', urlencodedParser, (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     sql = `UPDATE feedback SET classificacao_admin = ${req.body.classificacao_admin} WHERE id_numerico = ${req.body.id_numerico};`;
+    console.log(sql);
+    db.run(sql, [], err => {
+        if (err) {
+            throw err;
+        }
+    });
+    db.close(); // Fecha o banco
+    res.end();
+});
+
+app.get('/joinha/:id', (req, res) => {
+    const idJoinha = req.params.id;
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    sql = `SELECT qtd_like_colaborador FROM feedback WHERE id_numerico = ${idJoinha}`;
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            throw err;
+        }
+        res.json(rows);
+    });
+    // Fecha o banco
+    db.close();
+});
+
+app.put('/attJoinha', urlencodedParser, (req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    sql = `UPDATE feedback SET qtd_like_colaborador = ${req.body.qtd_like_colaborador} WHERE id_numerico = ${req.body.id_numerico};`;
     console.log(sql);
     db.run(sql, [], err => {
         if (err) {
