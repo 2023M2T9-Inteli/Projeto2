@@ -64,8 +64,18 @@ npm start
 
 ## 🗃 Histórico de lançamentos
 
-* 0.0.1 - 24/04/2022
-    * Início do projeto
+* 0.2.1 - 25/01/2022
+  * Atualização de documentos (código do módulo permanece inalterado).
+* 0.2.0 - 15/01/2022
+  * Remove setDefaultXYZ()
+  * Adiciona init()
+* 0.1.1 - 11/01/2022
+  * Crash quando chama baz()
+* 0.1.0 - 10/01/2022
+  * O primeiro lançamento adequado
+  * Renomeia foo() para bar()
+* 0.0.1 - 01/01/2022
+  * Trabalho em andamento
 
 ## 📋 Licença/License
 
