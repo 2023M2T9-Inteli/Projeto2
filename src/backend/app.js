@@ -33,6 +33,13 @@ app.get('/pesquisa', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
 
+    // Definição da quantidade de registros por página
+    const registrosPorPagina = 10;
+    // Recupera o número da página a partir dos parâmetros da requisição, caso não tenha, define como 1
+    const pagina = req.query.pagina ? parseInt(req.query.pagina) : 1;
+    // Calcula o offset com base na página atual e a quantidade de registros por página
+    const offset = (pagina - 1) * registrosPorPagina;
+
     // Separação dos termos de pesquisa em um array
     const termosPesquisa = req.query.termo.trim().split(" ");
 
@@ -87,7 +94,10 @@ FROM
         feedback.classificacao_admin, feedback.qtd_like_colaborador ASC`;
     }
 
-    console.log(ordemFiltro)
+    // Aplicação da paginação na consulta SQL com LIMIT e OFFSET
+    sql += ' LIMIT ? OFFSET ?';
+    params.push(registrosPorPagina);
+    params.push(offset);
 
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     db.all(sql, params, (err, rows) => {
@@ -217,16 +227,67 @@ app.post('/ticket/aprovar', urlencodedParser, (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
-    sql = "UPDATE ticket SET status='aprovado' WHERE id_ticket=" + req.body.id_ticket;
-    console.log(sql);
-    db.run(sql, [], err => {
-        if (err) {
-            throw err;
+
+    var consultaSQL = "UPDATE ticket SET status='aprovado' WHERE id_ticket=" + req.body.id_ticket;
+    var consultaUpdate = req.body.update_query;
+
+    console.log(consultaSQL);
+    db.run(consultaSQL, [], erroConsulta => {
+        if (erroConsulta) {
+            console.error('Erro ao executar a consulta:', erroConsulta);
+            res.status(500).json({ error: 'Ocorreu um erro ao aprovar o ticket.' });
+            db.close();
+            return;
+        }
+
+        if (consultaUpdate) {
+            var queries = consultaUpdate.split(';'); // Divide as queries separadas por ponto e vírgula
+            queries = queries.map(query => query.trim()); // Remove espaços em branco extras
+
+            var totalQueries = queries.length;
+            var queriesExecutadas = 0;
+            var erroUpdateOcorreu = false;
+
+            queries.forEach(query => {
+                if (query) {
+                    db.run(query, [], erroUpdate => {
+                        queriesExecutadas++;
+                        if (erroUpdate) {
+                            console.error('Erro ao executar a consulta de atualização:', erroUpdate);
+                            erroUpdateOcorreu = true;
+                        }
+
+                        if (queriesExecutadas === totalQueries) {
+                            if (erroUpdateOcorreu) {
+                                res.status(500).json({ error: 'Ocorreu um erro ao executar a consulta de atualização.' });
+                            } else {
+                                res.json({ message: 'Ticket aprovado com sucesso.' });
+                            }
+                            db.close();
+                        }
+                    });
+                } else {
+                    queriesExecutadas++;
+                    if (queriesExecutadas === totalQueries) {
+                        if (erroUpdateOcorreu) {
+                            res.status(500).json({ error: 'Ocorreu um erro ao executar a consulta de atualização.' });
+                        } else {
+                            res.json({ message: 'Ticket aprovado com sucesso.' });
+                        }
+                        db.close();
+                    }
+                }
+            });
+        } else {
+            res.json({ message: 'Ticket aprovado com sucesso.' });
+            db.close();
         }
     });
-    db.close(); // Fecha o banco
-    res.end();
 });
+
+
+
+
 
 app.get('/estrelinhas/:id', (req, res) => {
     const idClassification = req.params.id;
