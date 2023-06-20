@@ -40,8 +40,6 @@ app.get('/pesquisa', (req, res) => {
     const conjuntoDeDadosFiltro = req.query.conjuntoDeDados;
     const dadosSensiveisFiltro = req.query.dadosSensiveis;
     const ownerFiltro = req.query.owner;
-    const stewardFiltro = req.query.steward;
-    const ordemFiltro = req.query.ordem;
 
     // Criação de um array de termos com "LIKE" para a consulta SQL
     const termosLike = termosPesquisa.map((termo) => `%${termo}%`);
@@ -77,10 +75,9 @@ FROM
         params.push(ownerFiltro);
     }
 
-    if (stewardFiltro) {
-        sql += ' AND cat_dados_steward.nome_data_owner = ?';
-        params.push(stewardFiltro);
-    }
+    console.log(conjuntoDeDadosFiltro)
+    console.log(dadosSensiveisFiltro)
+    console.log(ownerFiltro)
     
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     db.all(sql, params, (err, rows) => {
@@ -91,7 +88,6 @@ FROM
         res.json(rows);
     });
 });
-
 
 app.get('/resultado', (req, res) => {
     res.statusCode = 200;
