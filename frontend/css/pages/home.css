@@ -1,77 +1,47 @@
+/* define a altura do body como 100%*/
+body {
+    font-family: var(--font-family);
+    height: 100vh;
+}
+/* define a altura do body como 90%*/
 main {
     height: 90vh;
     display: flex;
 }
-
-main h1 {
+/* div com com a barra de pesquisa e o título centralizados */
+.search {
+    margin: auto;
+    width: 60%;
+    justify-items: center;
+}
+/* estiliza o título do panpedia */
+.search h1 {
     text-align: center;
     color: var(--color-primary);
     font-size: var(--font-size-mega);
 }
-
-.search {
-    margin: auto;
-    width: 60%;
-    align-items: center;
-    justify-items: center;
-}
-
+/* ponteiro que indica que a lupa pode ser clicada */
 .search i{
     cursor: pointer;
 }
-
+/* div com com a barra de pesquisa */
 .pesquisaInput {
     padding: 1rem 1.5rem;
-    border: 1px solid #07B2FD;
-    width: 100%;
+    border: 1px solid var(--color-primary);
     border-radius: 200px;
-    display: flex;
-    margin-right: auto;
-    display: inline-block;
-}
-
-.pesquisaInput i {
     color: var(--color-primary);
 }
-
+/* input para a pesquisa */
 input[type="text"] {
     margin-left: 0.7rem;
     border: none;
-    background-color: transparent;
-    flex-grow: 100%;
-    width: 90%;
     outline: none;
+    background-color: transparent;
+    width: 90%;
     font-size: 20px;
 }
-
-body {
-    font-family: var(--font-family);
-    color: var(--color-white);
-    overflow: hidden;
-    height: 100vh;
-
-
-}
-
+/* texto que o usuário escreveu no input */
 .textPesquisa {
     font-family: var(--font-family);
     color: var(--color-grey-dark);
-}
-
-
-.container {
-    width: 100vw;
-    height: 100vh;
-    overflow-y: auto;
-    box-sizing: border-box;
-    padding-right: 15px;
-    /* Compensação para evitar que o conteúdo seja cortado */
-}
-
-/* Estilos adicionais para tornar o conteúdo dentro do container responsivo */
-.inner-content {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    /* ... outros estilos ... */
 }
