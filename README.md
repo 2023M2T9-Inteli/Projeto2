@@ -34,7 +34,7 @@ Nosso principal objetivo é melhorar a usabilidade do PanPedia, tornando-o mais 
 |--> docs <br>
   &emsp;|--> WAD.docx<br>
   &emsp;|--> WAD.pdf<br>
-|--> img <br>
+|--> imagens <br>
 |--> src <br>
   &emsp;|--> backend <br>
   &emsp;|--> frontend <br>
