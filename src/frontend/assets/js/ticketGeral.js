@@ -86,7 +86,7 @@ fetch(url2)
         // Registra a alteração do campo, passando o nome da variável, o campo e o novo valor como parâmetros.
         registrarAlteracaoCampo(item.nome_campo, 'Descrição do campo', this.value);
         // Registra a alteração do campo, passando o nome do campo no padrão do banco de dados, o novo valor e o ID da variável como parâmetros.
-        registrarAlteracaoCatDadosVariaveis('descricao_campo', this.value, item.id_variaveis);
+        registrarAlteracaoCatDadosVariaveis('descricao_campo', this.value, item.id_variavel);
       });
 
       // Cria uma nova linha para informações adicionais.
@@ -99,7 +99,7 @@ fetch(url2)
       descricaoCampo.textContent = item.descricao_campo;
       descricaoCampo.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Descrição do campo', this.value);
-        registrarAlteracaoCatDadosVariaveis('descricao_campo', this.value, item.id_variaveis);
+        registrarAlteracaoCatDadosVariaveis('descricao_campo', this.value, item.id_variavel);
       });
 
 
@@ -108,56 +108,56 @@ fetch(url2)
       tipoCampo.textContent = `${item.tipo_campo}`;
       tipoCampo.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Tipo do campo', this.value);
-        registrarAlteracaoCatDadosVariaveis('tipo_campo', this.value, item.id_variaveis);
+        registrarAlteracaoCatDadosVariaveis('tipo_campo', this.value, item.id_variavel);
       });
 
       const tipoPessoa = novaLinhaInfoAdicional.querySelector('#tipoPessoa');
       tipoPessoa.textContent = `${item.tipo_pessoa}`;
       tipoPessoa.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Tipo de pessoa', this.value);
-        registrarAlteracaoCatDadosVariaveis('tipo_pessoa', this.value, item.id_variaveis);
+        registrarAlteracaoCatDadosVariaveis('tipo_pessoa', this.value, item.id_variavel);
       });
 
       const amostraCampo = novaLinhaInfoAdicional.querySelector('#amostraCampo');
       amostraCampo.textContent = `${item.amostra_campo}`;
       amostraCampo.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Amostra do campo', this.value);
-        registrarAlteracaoCatDadosVariaveis('amostra_campo', this.value, item.id_variaveis);
+        registrarAlteracaoCatDadosVariaveis('amostra_campo', this.value, item.id_variavel);
       });
 
       const chavePrimaria = novaLinhaInfoAdicional.querySelector('#chavePrimaria');
       chavePrimaria.textContent = `${item.ch_primaria}`;
       chavePrimaria.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Chave primária', this.value);
-        registrarAlteracaoCatDadosVariaveis('ch_primaria', this.value, item.id_variaveis);
+        registrarAlteracaoCatDadosVariaveis('ch_primaria', this.value, item.id_variavel);
       });
 
       const nullCampo = novaLinhaInfoAdicional.querySelector('#nullCampo');
       nullCampo.textContent = `${item.null_campo}`;
       nullCampo.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Null campo', this.value);
-        registrarAlteracaoCatDadosVariaveis('null_campo', this.value, item.id_variaveis);
+        registrarAlteracaoCatDadosVariaveis('null_campo', this.value, item.id_variavel);
       });
 
       const unq = novaLinhaInfoAdicional.querySelector('#unq');
       unq.textContent = `${item.unq}`;
       unq.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Unq', this.value);
-        registrarAlteracaoCatDadosVariaveis('unq', this.value, item.id_variaveis);
+        registrarAlteracaoCatDadosVariaveis('unq', this.value, item.id_variavel);
       });
 
       const volatil = novaLinhaInfoAdicional.querySelector('#volatil');
       volatil.textContent = `${item.volatil}`;
       volatil.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Volatil', this.value);
-        registrarAlteracaoCatDadosVariaveis('volatil', this.value, item.id_variaveis);
+        registrarAlteracaoCatDadosVariaveis('volatil', this.value, item.id_variavel);
       });
 
       const lgpd = novaLinhaInfoAdicional.querySelector('#lgpd');
       lgpd.textContent = `${item.lgpd}`;
       lgpd.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Lgpd', this.value);
-        registrarAlteracaoCatDadosVariaveis('lgpd', this.value, item.id_variaveis);
+        registrarAlteracaoCatDadosVariaveis('lgpd', this.value, item.id_variavel);
       });
 
       // Adiciona um evento de clique para exibir/ocultar informações adicionais.
@@ -191,7 +191,7 @@ fetch(url2)
     console.log('Erro ao obter os dados da tabela:', error);
   });
 
-  // Função para adicionar um evento de alteração para um campo da tabela.
+// Função para adicionar um evento de alteração para um campo da tabela.
 function adicionarEventListener(idElemento, campo, campoBanco, tabela) {
   //Adiciona um evento de alteração para o campo.
   document.getElementById(idElemento).addEventListener('change', function () {
@@ -256,7 +256,7 @@ function registrarAlteracaoCatDadosTabela(campoBanco, valor) {
 
 // Função para registrar as alterações dos campos da tabela 'cat_dados_variaveis' e armazenar em um mesmo objeto.
 function registrarAlteracaoCatDadosVariaveis(campoBanco, novoValor, idVariavel) {
-  const clausulaUpdate = `UPDATE cat_dados_variaveis SET ${campoBanco}  = '${novoValor}' WHERE id_variaveis = ${idVariavel}`;
+  const clausulaUpdate = `UPDATE cat_dados_variaveis SET ${campoBanco} = '${novoValor}' WHERE id_variavel = ${idVariavel})`;
   updates.push(clausulaUpdate);
 }
 
@@ -275,7 +275,7 @@ function exibirResumoAlteracoes() {
   // Verifica se existem cláusulas para atualização na tabela 'cat_dados_conexoes'.
   if (clausulasSetStringCatDadosConexoes) {
     // Junta todas as cláusulas SET em um UPDATE e envia o update para o array 'updates'.
-    const updateQueryCatDadosConexoes = `UPDATE cat_dados_conexoes SET ${clausulasSetStringCatDadosConexoes} WHERE id_numero_conexoes = (SELECT id_numero_conexoes FROM cat_dados_tabela WHERE id_tabela = ${idTabela})`;
+    const updateQueryCatDadosConexoes = `UPDATE cat_dados_conexoes SET ${clausulasSetStringCatDadosConexoes} WHERE id_tabela IN (SELECT cat_dados_tabela.id_tabela FROM cat_dados_tabela WHERE cat_dados_tabela.id_numerico = ${idTabela})`;
     updates.push(updateQueryCatDadosConexoes);
   }
 
@@ -284,7 +284,7 @@ function exibirResumoAlteracoes() {
   // Verifica se existem cláusulas para atualização na tabela 'cat_dados_owner'.
   if (clausulasSetStringCatDadosOwner) {
     // Junta todas as cláusulas SET em um UPDATE e envia o update para o array 'updates'.
-    const updateQueryCatDadosOwner = `UPDATE cat_dados_owner SET ${clausulasSetStringCatDadosOwner} WHERE id_owner = (SELECT id_owner FROM cat_dados_tabela WHERE id_tabela = ${idTabela})`;
+    const updateQueryCatDadosOwner = `UPDATE cat_dados_owner SET ${clausulasSetStringCatDadosOwner} WHERE conjunto_de_dados IN (SELECT cat_dados_tabela.conjunto_de_dados FROM cat_dados_tabela WHERE cat_dados_tabela.id_numerico = ${idTabela})`;
     updates.push(updateQueryCatDadosOwner);
   }
 
@@ -293,7 +293,7 @@ function exibirResumoAlteracoes() {
   // Verifica se existem cláusulas para atualização na tabela 'cat_dados_tabela'.
   if (clausulasSetStringCatDadosTabela) {
     // Junta todas as cláusulas SET em um UPDATE e envia o update para o array 'updates'.
-    const updateQueryCatDadosTabela = `UPDATE cat_dados_tabela SET ${clausulasSetStringCatDadosTabela} WHERE id_tabela = ${idTabela}`;
+    const updateQueryCatDadosTabela = `UPDATE cat_dados_tabela SET ${clausulasSetStringCatDadosTabela} WHERE id_numerico = ${idTabela}`;
     updates.push(updateQueryCatDadosTabela);
   }
 
