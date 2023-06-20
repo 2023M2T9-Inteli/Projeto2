@@ -21,11 +21,11 @@ Nossa missão é revitalizar o PanPedia, transformando-o em uma ferramenta efici
 Nosso principal objetivo é melhorar a usabilidade do PanPedia, tornando-o mais acessível e amigável aos usuários. Para isso, iremos desenvolver uma nova plataforma que promova uma navegação intuitiva, simplificando a busca, classificação e solicitação de alteração de dados. O novo PanPedia será uma ferramenta versátil, fornecendo recursos avançados para otimizar o fluxo de trabalho e a colaboração entre as equipes.
 
 ## 👩‍🏫 Professores
-- <a href="">Claudio Andre</a>
-- <a href="">Fatima Toledo</a>
-- <a href="">Flavio Marques Azevedo</a>
-- <a href="">Francisco Escobar</a> 
-- <a href="">Henrique Paiva</a> 
+- <a href="https://www.linkedin.com/in/claudio-andré-64911a1b5/">Claudio Andre</a>
+- <a href="https://www.linkedin.com/in/fatima-toledo/">Fatima Toledo</a>
+- <a href="https://www.linkedin.com/in/flaviomarquesazevedo/">Flavio Marques Azevedo</a>
+- <a href="https://www.linkedin.com/in/francisco-escobar/">Francisco Escobar</a> 
+- <a href="https://www.linkedin.com/in/henrique-mohallem-paiva-6854b460/">Henrique Paiva</a> 
 
 ## 📁 Estrutura de pastas
 
