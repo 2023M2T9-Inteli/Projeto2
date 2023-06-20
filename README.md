@@ -1,7 +1,11 @@
-# Projeto2
-Projeto 2 - Pan Tera
+# Inteli - Instituto de Tecnologia e Liderança 
+<p align="center">
+<a href= "https://www.inteli.edu.br/"><img src="https://s3.amazonaws.com/gupy5/production/companies/26702/career/63484/images/2022-04-28_16-56_logo.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0"></a>
+</p>
 
-## Integrantes
+# Panpedia
+
+# Equipe Pan Tera
 - <a href="https://www.linkedin.com/in/henrique-cox-4644bb270/">Herique Cox</a>
 - <a href="https://www.linkedin.com/in/ivan-ferreira-4270ab263/">Ivan Ferreira</a>
 - <a href="https://www.linkedin.com/in/lidia-mariano-b68282264/">Lídia Cruz Mariano</a>
@@ -25,18 +29,18 @@ Nosso principal objetivo é melhorar a usabilidade do PanPedia, tornando-o mais 
 
 ## 📁 Estrutura de pastas
 
-| -->.vscode <br>
-|--> backend<br>
-| --> data <br>
-| --> docs <br>
-  &emsp;| T9_G2_V3_Web_application_document.pdf<br>
-  &emsp;| T9_G2_V3_Web_application_document.docx<br>
-|--> frontend<br>
-| .gitignore<br>
-| readme.md<br>
-| LICENSE<br>
-| package-lock.json<br>
-| package.json
+- Raiz <br>
+|<br>
+|--> docs <br>
+  &emsp;|--> WAD.docx<br>
+  &emsp;|--> WAD.pdf<br>
+|--> img <br>
+|--> src <br>
+  &emsp;|--> backend <br>
+  &emsp;|--> frontend <br>
+|--> .gitgnore <br>
+|--> LICENSE <br>
+|--> README.md <br>
 
 ## 💻 Configuração para desenvolvimento
 
@@ -55,23 +59,8 @@ Isso instalará todas as dependências definidas no arquivo <b>package.json</b> 
 ```sh
 npm start
 ```
-5. Agora você pode acessar a aplicação através do link http://localhost:1234/
+5. Agora você pode acessar a aplicação através do link http://localhost:127.0.0.1/
 6. O servidor está online.
-
-
-```
-Alunos inteli (remover essa observação do readme.md após leitura e execução):
-
-1. Certifique-se que há um arquivo "package.json" na pasta backend do projeto.
-
-2. Dentro deste arquivo, encontre a propriedade "scripts", e adicione um atributo de nome "start"
-com o valor "node <CAMINHO_DO_ARQUIVO_DO_SERVIDOR>." Atenção: "<CAMINHO_DO_ARQUIVO_DO_SERVIDOR>" 
-deve ser substituído pelo caminho para o arquivo principal da aplicação, utilizado para subir o
-servidor. Por exemplo, se o arquivo utilizado para subir o servidor é "app.js", o atributo start
-deve possuir o valor "node app.js".
-
-3. No arquivo utilizado para subir a aplicação, defina a porta padrão de execução para "1234".
-````
 
 ## 🗃 Histórico de lançamentos
 
@@ -80,7 +69,7 @@ deve possuir o valor "node app.js".
 
 ## 📋 Licença/License
 
-<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Spidus/Teste_Final_1">MODELO GIT INTELI</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://www.yggbrasil.com.br/vr">Inteli, Henrique Cox, Ivan Ferreira, Lídia Mariano, Mateus Gois, Nicollas Isaac, Raissa Vieira de Melo </a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International</a>.</p>
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/2023M2T9-Inteli/projeto2">Panpedia</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/2023M2T9-Inteli/projeto2">Inteli,Mateus Marçal Barbosa de Melo Góis,Henrique Cox,Lídia Cruz Mariano,Raissa Vieira de Melo,Matthias Guernet,Nicollas Isaac,Ivan Ferreira</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
 
 ## 🎓 Referências
 
