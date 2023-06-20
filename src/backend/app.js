@@ -6,7 +6,7 @@ const sqlite3 = require('sqlite3').verbose();
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // Caminho do banco de dados SQLite a ser utilizado
-const DBPATH = 'data/catalogo_dados.db';
+const DBPATH = 'backend/data/catalogo_dados.db';
 
 // Definição do hostname e porta do servidor web
 const hostname = '127.0.0.1';
