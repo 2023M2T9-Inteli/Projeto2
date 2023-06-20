@@ -3,7 +3,7 @@ body {
     font-family: var(--font-family);
     height: 100vh;
 }
-/* define a altura do body como 90%*/
+/* define a altura do main como 90%*/
 main {
     height: 90vh;
     display: flex;
