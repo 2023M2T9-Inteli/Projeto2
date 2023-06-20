@@ -72,12 +72,67 @@ function solicitarTicket() {
 // Altera funcionalidades(classificação em estrelas e botão de solicitar acesso) na página de resultados de acordo com o valor do parâmetro admin 
 if (Admin == "nao" || !Admin) {
     // se for igual a 'nao' ou se for nulo, altera o conteúdo do elemento divFeedback para mostrar a funcionalidade de like/dislike
-    let conteudo = "<div style='margin-top: 5%;'><p>Dê seu FeedBack</p></div>\n";
-    conteudo += "<button title='Curti a tabela'> <i class='far tooltip-btn fa-thumbs-up'></i></button>\n";
-    conteudo += "<button title='Não curti a tabela'><i class='fa-regular fa-thumbs-down'></i></button>";
+    let conteudo = `<div style='margin-top: 5%;'><p>Dê seu FeedBack</p></div>
+                <button title='Curti a tabela'> <i id='gostei' class='fa-regular fa-thumbs-up'></i></button>
+                <button title='Não curti a tabela'><i id='naoGostei' class='fa-regular fa-thumbs-down'></i></button>`;
     document.getElementById("divFeedback").innerHTML = conteudo;
 
     document.getElementById("divSolicitarAcesso").style.display = "inline-block";
+
+    /* Declarando variável statusGostei referente ao status de like/dislike da tabela */
+    var statusGostei;
+
+    /* Definindo endopoint para consultar o status do like/dislike de uma tabela */
+    const urlJoinha = '/joinha/' + id_numerico;
+
+    /* Definindo variável gostei referente ao ícone de gostei e variável naoGostei referente ao ícone naoGostei */
+    const gostei = document.getElementById('gostei');
+    const naoGostei = document.getElementById('naoGostei');
+
+    /* Definindo função para consultar o status de like/dislike anterior da tabela */
+    const verificarJoinhaAnterior = async () => {
+        const joinhaAnterior = await fetch(urlJoinha);
+        const joinhaJson = await joinhaAnterior.json();
+        console.log(joinhaJson);
+
+        switch (joinhaJson[0].qtd_like_colaborador) {
+            case 1:
+                gostei.className = 'fa-solid fa-thumbs-up';
+                naoGostei.className = 'fa-regular fa-thumbs-down';
+                break;
+            case -1:
+                naoGostei.className = 'fa-solid fa-thumbs-down';
+                gostei = 'fa-regular fa-thumbs-up';
+                break;
+        }
+    }
+    verificarJoinhaAnterior();
+
+    /* Definição da função que realiza requisição PUT para atualizar o status like/dislike da tabela */
+    const atualizarJoinha = (joinhaValor) => {
+        const body = `id_numerico=${id_numerico}&qtd_like_colaborador=${joinhaValor}`;
+        fetch('/attJoinha', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: body
+        })
+            .catch(err => console.log(err));
+    }
+
+    /* Event listener para o botão gostei */
+    gostei.addEventListener('click', () => {
+        atualizarJoinha(1);
+        naoGostei.className = 'fa-regular fa-thumbs-down';
+        gostei.className = 'fa-solid fa-thumbs-up';
+    });
+
+    /* Event listener para o botão naoGostei */
+    naoGostei.addEventListener('click', () => {
+        atualizarJoinha(-1);
+        gostei.className = 'fa-regular fa-thumbs-up';
+        naoGostei.className = 'fa-solid fa-thumbs-down';
+    });
+
 } else if (Admin == "sim") {
     // se for igual a 'sim', altera o conteúdo do elemento divFeedback para mostrar a funcionalidade de classificação por estrelas
     let conteudo = "<div style='margin-top: 5%;'><p>Classificar tabela:</p></div>\n";
@@ -98,77 +153,77 @@ if (Admin == "nao" || !Admin) {
     document.getElementById("divFeedback").innerHTML = conteudo;
 
     document.getElementById("divSolicitarAcesso").style.display = "none";
-}
 
-/* Declaração da variável qtdEstrelas, que guarda a quantidade de estrelas da tabela */
-var qtdEstrelas;
+    /* Declaração da variável qtdEstrelas, que guarda a quantidade de estrelas da tabela */
+    var qtdEstrelas;
 
-/* Definição da variável urlClassificacao, referente ao endpoint de SELECT da quantidade de estrelas da tabela */
-const urlClassificacao = '/estrelinhas/' + id_numerico;
+    /* Definição da variável urlClassificacao, referente ao endpoint de SELECT da quantidade de estrelas da tabela */
+    const urlClassificacao = '/estrelinhas/' + id_numerico;
 
-/* Definições das variáveis referentes aos inputs das estrelinhas */
-const star1 = document.getElementById('star1');
-const star2 = document.getElementById('star2');
-const star3 = document.getElementById('star3');
-const star4 = document.getElementById('star4');
-const star5 = document.getElementById('star5');
+    /* Definições das variáveis referentes aos inputs das estrelinhas */
+    const star1 = document.getElementById('star1');
+    const star2 = document.getElementById('star2');
+    const star3 = document.getElementById('star3');
+    const star4 = document.getElementById('star4');
+    const star5 = document.getElementById('star5');
 
-/* Definição da função que verifica se existe uma classificação anterior referente à tabela e, de acordo com isso, preenche as estrelinhas */
-const verificarClassificacaoAnterior = async () => {
-    const classificacaoAnterior = await fetch(urlClassificacao);
-    const classificacaoJson = await classificacaoAnterior.json();
+    /* Definição da função que verifica se existe uma classificação anterior referente à tabela e, de acordo com isso, preenche as estrelinhas */
+    const verificarClassificacaoAnterior = async () => {
+        const classificacaoAnterior = await fetch(urlClassificacao);
+        const classificacaoJson = await classificacaoAnterior.json();
 
-    switch (classificacaoJson[0].classificacao_admin) {
-        case 1:
-            star1.checked = true;
-            break;
-        case 2:
-            star2.checked = true;
-            break;
-        case 3:
-            star3.checked = true;
-            break;
-        case 4:
-            star4.checked = true;
-            break;
-        case 5:
-            star5.checked = true;
-            break;
+        switch (classificacaoJson[0].classificacao_admin) {
+            case 1:
+                star1.checked = true;
+                break;
+            case 2:
+                star2.checked = true;
+                break;
+            case 3:
+                star3.checked = true;
+                break;
+            case 4:
+                star4.checked = true;
+                break;
+            case 5:
+                star5.checked = true;
+                break;
+        }
     }
+    verificarClassificacaoAnterior();
+
+    /* Definição da função que verifica se existe uma classificação anterior referente à tabela e atribui o valor na variável qtdEstrelas */
+    const pegarClassificacaoAnterior = async () => {
+        const response = await fetch(urlClassificacao);
+        const json = await response.json();
+        console.log(json);
+        qtdEstrelas = json[0].classificacao_admin;
+        console.log(qtdEstrelas);
+    }
+    pegarClassificacaoAnterior();
+
+    /* Definição da função que realiza uma requisição PUT para realizar o UPDATE conforme o valor de qtdEstrelas */
+    const atualizarClassificacao = (starValue) => {
+        const body = `id_numerico=${id_numerico}&classificacao_admin=${starValue}`;
+        fetch('/attClassificacao', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: body
+        })
+            .catch(err => console.log(err));
+    }
+
+    /* Definição da função que cria um event listener de click para as estrelinhas */
+    const iniciarListener = (star, value) => {
+        star.addEventListener('click', () => {
+            pegarClassificacaoAnterior();
+            atualizarClassificacao(value);
+        });
+    };
+
+    iniciarListener(star1, 1);
+    iniciarListener(star2, 2);
+    iniciarListener(star3, 3);
+    iniciarListener(star4, 4);
+    iniciarListener(star5, 5);
 }
-verificarClassificacaoAnterior();
-
-/* Definição da função que verifica se existe uma classificação anterior referente à tabela e atribui o valor na variável qtdEstrelas */
-const pegarClassificacaoAnterior = async () => {
-    const response = await fetch(urlClassificacao);
-    const json = await response.json();
-    console.log(json);
-    qtdEstrelas = json[0].classificacao_admin;
-    console.log(qtdEstrelas);
-}
-pegarClassificacaoAnterior();
-
-/* Definição da função que realiza uma requisição PUT para realizar o UPDATE conforme o valor de qtdEstrelas */
-const atualizarClassificacao = (starValue) => {
-    const body = `id_numerico=${id_numerico}&classificacao_admin=${starValue}`;
-    fetch('/attclassificacao', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: body
-    })
-        .catch(err => console.log(err));
-}
-
-/* Definição da função que cria um event listener de click para as estrelinhas */
-const iniciarListener = (star, value) => {
-    star.addEventListener('click', () => {
-        pegarClassificacaoAnterior();
-        atualizarClassificacao(value);
-    });
-};
-
-iniciarListener(star1, 1);
-iniciarListener(star2, 2);
-iniciarListener(star3, 3);
-iniciarListener(star4, 4);
-iniciarListener(star5, 5);
