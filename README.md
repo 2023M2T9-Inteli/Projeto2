@@ -25,7 +25,7 @@ Nosso principal objetivo é melhorar a usabilidade do PanPedia, tornando-o mais 
 - <a href="https://www.linkedin.com/in/fatima-toledo/">Fatima Toledo</a>
 - <a href="https://www.linkedin.com/in/flaviomarquesazevedo/">Flavio Marques Azevedo</a>
 - <a href="https://www.linkedin.com/in/francisco-escobar/">Francisco Escobar</a> 
-- <a href="https://www.linkedin.com/in/henrique-mohallem-paiva-6854b460/">Henrique Paiva</a> 
+- <a href="http://lattes.cnpq.br/6901974057937430">Henrique Paiva</a> 
 
 ## 📁 Estrutura de pastas
 
