@@ -40,7 +40,6 @@ app.get('/pesquisa', (req, res) => {
     const conjuntoDeDadosFiltro = req.query.conjuntoDeDados;
     const dadosSensiveisFiltro = req.query.dadosSensiveis;
     const ownerFiltro = req.query.owner;
-    const stewardFiltro = req.query.steward;
     const ordemFiltro = req.query.ordem;
 
     // Criação de um array de termos com "LIKE" para a consulta SQL
@@ -56,7 +55,8 @@ app.get('/pesquisa', (req, res) => {
 FROM 
     cat_dados_tabela
     INNER JOIN cat_dados_owner ON cat_dados_tabela.conjunto_de_dados = cat_dados_owner.conjunto_de_dados
-    INNER JOIN cat_dados_conexoes ON cat_dados_tabela.id_tabela = cat_dados_conexoes.id_tabela`;
+    INNER JOIN cat_dados_conexoes ON cat_dados_tabela.id_tabela = cat_dados_conexoes.id_tabela
+    INNER JOIN feedback ON cat_dados_tabela.id_numerico = feedback.id_numerico`;
 
     const params = [...termosLike, ...termosLike, ...termosLike, ...termosLike];
 
@@ -77,11 +77,18 @@ FROM
         params.push(ownerFiltro);
     }
 
-    if (stewardFiltro) {
-        sql += ' AND cat_dados_steward.nome_data_owner = ?';
-        params.push(stewardFiltro);
+    if (ordemFiltro) {
+        sql += `
+            ORDER BY 
+            feedback.classificacao_admin, feedback.qtd_like_colaborador DESC`;
+    } else {
+        sql += `
+        ORDER BY 
+        feedback.classificacao_admin, feedback.qtd_like_colaborador ASC`;
     }
-    
+
+    console.log(ordemFiltro)
+
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     db.all(sql, params, (err, rows) => {
         if (err) {
@@ -92,14 +99,13 @@ FROM
     });
 });
 
-
 app.get('/resultado', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
 
     const idNumerico = req.query.id_numerico;
 
-    const sql = `SELECT * FROM cat_dados_tabela JOIN cat_dados_owner ON cat_dados_tabela.conjunto_de_dados = cat_dados_owner.conjunto_de_dados JOIN cat_dados_conexoes ON cat_dados_tabela.id_tabela = cat_dados_conexoes.id_tabela WHERE cat_dados_tabela.id_numerico = ${idNumerico}` ;
+    const sql = `SELECT * FROM cat_dados_tabela JOIN cat_dados_owner ON cat_dados_tabela.conjunto_de_dados = cat_dados_owner.conjunto_de_dados JOIN cat_dados_conexoes ON cat_dados_tabela.id_tabela = cat_dados_conexoes.id_tabela WHERE cat_dados_tabela.id_numerico = ${idNumerico}`;
 
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     db.all(sql, [], (err, rows) => {
@@ -159,7 +165,7 @@ app.post('/ticket/solicitacao', (req, res) => {
     }, {});
 
     // Extrai os valores individuais
-    const { nome, email, motivo, id_numerico, update_query, status, resumo} = values;
+    const { nome, email, motivo, id_numerico, update_query, status, resumo } = values;
 
     // Executa a lógica de atualização no banco de dados
     const sql = `INSERT INTO ticket (nome, email, motivo, id_numerico, update_query, status, resumo) VALUES ('${nome}', '${email}', '${motivo}', '${id_numerico}', '${update_query.replace(/'/g, "''")}', '${status}', '${resumo}')`;
@@ -193,33 +199,33 @@ app.get('/ticket/pendente', (req, res) => {
 });
 
 app.post('/ticket/apagar', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	sql = "UPDATE ticket SET status='rejeitado' WHERE id_ticket=" + req.body.id_ticket;
-	console.log(sql);
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}	
-	});
-	db.close(); // Fecha o banco
-	res.end();
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    sql = "UPDATE ticket SET status='rejeitado' WHERE id_ticket=" + req.body.id_ticket;
+    console.log(sql);
+    db.run(sql, [], err => {
+        if (err) {
+            throw err;
+        }
+    });
+    db.close(); // Fecha o banco
+    res.end();
 });
 
 app.post('/ticket/aprovar', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	sql = "UPDATE ticket SET status='aprovado' WHERE id_ticket=" + req.body.id_ticket;
-	console.log(sql);
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}	
-	});
-	db.close(); // Fecha o banco
-	res.end();
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    sql = "UPDATE ticket SET status='aprovado' WHERE id_ticket=" + req.body.id_ticket;
+    console.log(sql);
+    db.run(sql, [], err => {
+        if (err) {
+            throw err;
+        }
+    });
+    db.close(); // Fecha o banco
+    res.end();
 });
 
 app.get('/estrelinhas/:id', (req, res) => {
@@ -254,18 +260,18 @@ app.post('/classificar', urlencodedParser, (req, res) => {
 });
 
 app.put('/attclassificacao', urlencodedParser, (req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Access-Control-Allow-Origin', '*'); 
-	var db = new sqlite3.Database(DBPATH); // Abre o banco
-	sql = `UPDATE feedback SET classificacao_admin = ${req.body.classificacao_admin} WHERE id_numerico = ${req.body.id_numerico};`;
-	console.log(sql);
-	db.run(sql, [],  err => {
-		if (err) {
-		    throw err;
-		}	
-	});
-	db.close(); // Fecha o banco
-	res.end();
+    res.statusCode = 200;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    sql = `UPDATE feedback SET classificacao_admin = ${req.body.classificacao_admin} WHERE id_numerico = ${req.body.id_numerico};`;
+    console.log(sql);
+    db.run(sql, [], err => {
+        if (err) {
+            throw err;
+        }
+    });
+    db.close(); // Fecha o banco
+    res.end();
 });
 
 // Inicialização do servidor web na porta e hostname definidos anteriormente
