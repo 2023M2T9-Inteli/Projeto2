@@ -105,56 +105,56 @@ fetch(url2)
 
       // Preenche as informações adicionais na tabela com os valores correspondentes e adiciona eventos de alteração para cada informação, chamando as funções para registrar as alterações ocorridas nos campos.
       const tipoCampo = novaLinhaInfoAdicional.querySelector('#tipoCampo');
-      tipoCampo.textContent = `${item.tipo_campo}`;
+      tipoCampo.textContent = item.tipo_campo;
       tipoCampo.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Tipo do campo', this.value);
         registrarAlteracaoCatDadosVariaveis('tipo_campo', this.value, item.id_variavel);
       });
 
       const tipoPessoa = novaLinhaInfoAdicional.querySelector('#tipoPessoa');
-      tipoPessoa.textContent = `${item.tipo_pessoa}`;
+      tipoPessoa.textContent = item.tipo_pessoa;
       tipoPessoa.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Tipo de pessoa', this.value);
         registrarAlteracaoCatDadosVariaveis('tipo_pessoa', this.value, item.id_variavel);
       });
 
       const amostraCampo = novaLinhaInfoAdicional.querySelector('#amostraCampo');
-      amostraCampo.textContent = `${item.amostra_campo}`;
+      amostraCampo.textContent = item.amostra_campo;
       amostraCampo.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Amostra do campo', this.value);
         registrarAlteracaoCatDadosVariaveis('amostra_campo', this.value, item.id_variavel);
       });
 
       const chavePrimaria = novaLinhaInfoAdicional.querySelector('#chavePrimaria');
-      chavePrimaria.textContent = `${item.ch_primaria}`;
+      chavePrimaria.textContent = item.ch_primaria;
       chavePrimaria.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Chave primária', this.value);
         registrarAlteracaoCatDadosVariaveis('ch_primaria', this.value, item.id_variavel);
       });
 
       const nullCampo = novaLinhaInfoAdicional.querySelector('#nullCampo');
-      nullCampo.textContent = `${item.null_campo}`;
+      nullCampo.textContent = item.null_campo;
       nullCampo.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Null campo', this.value);
         registrarAlteracaoCatDadosVariaveis('null_campo', this.value, item.id_variavel);
       });
 
       const unq = novaLinhaInfoAdicional.querySelector('#unq');
-      unq.textContent = `${item.unq}`;
+      unq.textContent = item.unq;
       unq.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Unq', this.value);
         registrarAlteracaoCatDadosVariaveis('unq', this.value, item.id_variavel);
       });
 
       const volatil = novaLinhaInfoAdicional.querySelector('#volatil');
-      volatil.textContent = `${item.volatil}`;
+      volatil.textContent = item.volatil;
       volatil.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Volatil', this.value);
         registrarAlteracaoCatDadosVariaveis('volatil', this.value, item.id_variavel);
       });
 
       const lgpd = novaLinhaInfoAdicional.querySelector('#lgpd');
-      lgpd.textContent = `${item.lgpd}`;
+      lgpd.textContent = item.lgpd;
       lgpd.addEventListener('change', function () {
         registrarAlteracaoCampo(item.nome_campo, 'Lgpd', this.value);
         registrarAlteracaoCatDadosVariaveis('lgpd', this.value, item.id_variavel);
@@ -256,7 +256,7 @@ function registrarAlteracaoCatDadosTabela(campoBanco, valor) {
 
 // Função para registrar as alterações dos campos da tabela 'cat_dados_variaveis' e armazenar em um mesmo objeto.
 function registrarAlteracaoCatDadosVariaveis(campoBanco, novoValor, idVariavel) {
-  const clausulaUpdate = `UPDATE cat_dados_variaveis SET ${campoBanco} = '${novoValor}' WHERE id_variavel = ${idVariavel})`;
+  const clausulaUpdate = `UPDATE cat_dados_variaveis SET ${campoBanco} = '${novoValor}' WHERE id_variavel = ${idVariavel}`;
   updates.push(clausulaUpdate);
 }
 

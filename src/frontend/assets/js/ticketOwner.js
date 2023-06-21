@@ -60,6 +60,7 @@ fetch(url)
                         // Trata erros de requisição
                         console.error('Erro:', error);
                     });
+                location.reload()
             })
 
             const botaoAprovarTicket = novoTicket.querySelector('.escolhaAprovar');
@@ -70,14 +71,16 @@ fetch(url)
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ id_ticket: item.id_ticket,
-                    update_query: item.update_query
+                    body: JSON.stringify({
+                        id_ticket: item.id_ticket,
+                        update_query: item.update_query
                     })
                 })
                     .catch(error => {
                         // Trata erros de requisição
                         console.error('Erro:', error);
                     });
+                location.reload()
             })
 
             ticketsSolicitados.appendChild(novoTicket);
@@ -90,5 +93,5 @@ fetch(url)
 const botaoEditarTicket = novoTicket.querySelector('.editarTicket');
 
 botaoEditarTicket.addEventListener('click', () => {
-   
+
 })
