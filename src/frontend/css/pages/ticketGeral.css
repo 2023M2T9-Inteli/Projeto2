@@ -9,31 +9,20 @@ body {
 main {
   width: 90%;
   margin: auto;
+  margin-top: 1.5rem;
 }
 
 p {
   font-size: 1rem;
-}
-
-p, textarea {
   margin-top: 1rem;
 }
 
 #tituloTabela {
   text-align: center;
-  margin-top: 1.5rem;
-}
-
-#grupo {
-  margin-top: 2rem;
 }
 
 .content {
   margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.content h3{
   color: var(--color-grey-dark);
 }
 
@@ -42,19 +31,9 @@ p, textarea {
   border-radius: 20px;
   border: 1px solid var(--color-primary);
   width: 100%;
-  margin: auto;
-  text-align: inherit;
   color: var(--color-grey-dark);
   background-color: var(--color-white);
-}
-
-.textFixed {
-  color: var(--color-grey-dark);
-  display: flex;
-}
-
-#descricao h3{
-  color: var(--color-grey-dark);
+  resize: none;
 }
 
 #descricao_Campo {
@@ -65,16 +44,18 @@ p, textarea {
   display: none;
 }
 
-.textTituloCampo {
-  margin: auto;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-  color: var(--color-grey-dark);
-  justify-content: space-between;
-}
-
 #botao {
   cursor: pointer;
+}
+
+.maisInfo {
+  display: flex;
+  justify-content: center;
+}
+
+.mais-info {
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .mais-info textarea {
@@ -85,43 +66,26 @@ p, textarea {
   resize: none;
   overflow: hidden;
   margin: auto;
-  color: var(--color-grey-dark);
-}
-
-.mais-info {
-  margin-bottom: 2rem;
-}
-
-.maisInfo {
-  margin: auto;
-  color: var(--color-grey-dark);
-  text-align: center;
 }
 
 .mais-info p {
-  color: var(--color-grey-dark);
   font-size: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: .5s ease-in;
-}
-
-.container-variavel {
-  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 #RevisarBtn {
   background: var(--color-primary);
   color: var(--color-grey-dark);
   padding: 0.5rem 1rem;
-  cursor: pointer;
-  border: 1px solid var(--color-primary);
+  border: none;
   border-radius: 20px;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .divisoria {
   border-top: 1px solid var(--color-grey-dark);
   width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
