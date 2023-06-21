@@ -14,28 +14,19 @@
   display: none;
 }
 
-
 .popup-content {
   background-color: #2F2E43;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
+  border-radius: 20px;
   width: 50%;
   height: 50%;
   display: flex;
   flex-direction: column;
+  text-align: center;
   justify-content: center;
   position: relative;
 }
 
-.popup-content h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #FFFFFF;
-}
-
 .popup-content p {
-  font-size: 16px;
   color: #FFFFFF;
 }
 
@@ -51,5 +42,4 @@
 
 .close-button i {
   font-size: 24px;
-  color: #FFFFFF;
 }
