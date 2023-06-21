@@ -79,17 +79,17 @@ if (Admin == "nao" || !Admin) {
 
     document.getElementById("divSolicitarAcesso").style.display = "inline-block";
 
-    /* Declarando variável statusGostei referente ao status de like/dislike da tabela */
+    // Declara variável statusGostei referente ao status de like/dislike da tabela
     var statusGostei;
 
-    /* Definindo endopoint para consultar o status do like/dislike de uma tabela */
+    // Declara endopoint para consultar o status do like/dislike de uma tabela
     const urlJoinha = '/joinha/' + id_numerico;
 
-    /* Definindo variável gostei referente ao ícone de gostei e variável naoGostei referente ao ícone naoGostei */
+    // Obtém variável gostei referente ao ícone de gostei e variável naoGostei referente ao ícone naoGostei
     const gostei = document.getElementById('gostei');
     const naoGostei = document.getElementById('naoGostei');
 
-    /* Definindo função para consultar o status de like/dislike anterior da tabela */
+    // Função chamada para consultar o status de like/dislike anterior da tabela
     const verificarJoinhaAnterior = async () => {
         const joinhaAnterior = await fetch(urlJoinha);
         const joinhaJson = await joinhaAnterior.json();
@@ -108,7 +108,7 @@ if (Admin == "nao" || !Admin) {
     }
     verificarJoinhaAnterior();
 
-    /* Definição da função que realiza requisição PUT para atualizar o status like/dislike da tabela */
+    // Função chamada para realizar requisição PUT e atualizar o status like/dislike da tabela
     const atualizarJoinha = (joinhaValor) => {
         const body = `id_numerico=${id_numerico}&qtd_like_colaborador=${joinhaValor}`;
         fetch('/attJoinha', {
@@ -119,14 +119,14 @@ if (Admin == "nao" || !Admin) {
             .catch(err => console.log(err));
     }
 
-    /* Event listener para o botão gostei */
+    // Adiciona event listener para o botão gostei
     gostei.addEventListener('click', () => {
         atualizarJoinha(1);
         naoGostei.className = 'fa-regular fa-thumbs-down';
         gostei.className = 'fa-solid fa-thumbs-up';
     });
 
-    /* Event listener para o botão naoGostei */
+    // Adiciona event listener para o botão naoGostei
     naoGostei.addEventListener('click', () => {
         atualizarJoinha(-1);
         gostei.className = 'fa-regular fa-thumbs-up';
@@ -154,20 +154,20 @@ if (Admin == "nao" || !Admin) {
 
     document.getElementById("divSolicitarAcesso").style.display = "none";
 
-    /* Declaração da variável qtdEstrelas, que guarda a quantidade de estrelas da tabela */
+    // Declara a variável qtdEstrelas, que guarda a quantidade de estrelas da tabela
     var qtdEstrelas;
 
-    /* Definição da variável urlClassificacao, referente ao endpoint de SELECT da quantidade de estrelas da tabela */
+    // Obtém variável urlClassificacao, referente ao endpoint de SELECT da quantidade de estrelas da tabela
     const urlClassificacao = '/estrelinhas/' + id_numerico;
 
-    /* Definições das variáveis referentes aos inputs das estrelinhas */
+    // Obtém os inputs das estrelinhas */
     const star1 = document.getElementById('star1');
     const star2 = document.getElementById('star2');
     const star3 = document.getElementById('star3');
     const star4 = document.getElementById('star4');
     const star5 = document.getElementById('star5');
 
-    /* Definição da função que verifica se existe uma classificação anterior referente à tabela e, de acordo com isso, preenche as estrelinhas */
+    // Função chamada para verificar se existe uma classificação anterior referente à tabela e, de acordo com isso, preencher as estrelinhas
     const verificarClassificacaoAnterior = async () => {
         const classificacaoAnterior = await fetch(urlClassificacao);
         const classificacaoJson = await classificacaoAnterior.json();
@@ -192,7 +192,7 @@ if (Admin == "nao" || !Admin) {
     }
     verificarClassificacaoAnterior();
 
-    /* Definição da função que verifica se existe uma classificação anterior referente à tabela e atribui o valor na variável qtdEstrelas */
+    // Função chamada para verificar se existe uma classificação anterior referente à tabela e atribuir o valor na variável qtdEstrelas
     const pegarClassificacaoAnterior = async () => {
         const response = await fetch(urlClassificacao);
         const json = await response.json();
@@ -202,7 +202,7 @@ if (Admin == "nao" || !Admin) {
     }
     pegarClassificacaoAnterior();
 
-    /* Definição da função que realiza uma requisição PUT para realizar o UPDATE conforme o valor de qtdEstrelas */
+    // Função chamada para realizar uma requisição PUT e efetuar o UPDATE conforme o valor de qtdEstrelas
     const atualizarClassificacao = (starValue) => {
         const body = `id_numerico=${id_numerico}&classificacao_admin=${starValue}`;
         fetch('/attClassificacao', {
@@ -213,7 +213,7 @@ if (Admin == "nao" || !Admin) {
             .catch(err => console.log(err));
     }
 
-    /* Definição da função que cria um event listener de click para as estrelinhas */
+    // Função chamada para criar um event listener de click para as estrelinhas
     const iniciarListener = (star, value) => {
         star.addEventListener('click', () => {
             pegarClassificacaoAnterior();

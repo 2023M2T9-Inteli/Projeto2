@@ -193,14 +193,26 @@
     <div id="resultados"></div>
   </section>
   <footer>
-    <button id="botaoVoltarPagina"><i class="fa-solid fa-angle-left"></i></button>
-    <span id="paginaAtual">1</span>
-    <button id="botaoAvancarPagina"><i class="fa-solid fa-angle-right"></i></button>
+    <nav id="paginacao" aria-label="Navegação de página exemplo">
+      <ul class="pagination">
+        <li class="page-item">
+          <a id="botaoVoltarPagina" class="page-link" aria-label="Anterior">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Anterior</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" id="paginaAtual">1</a></li>
+        <li class="page-item">
+          <a id="botaoAvancarPagina" class="page-link" aria-label="Próximo">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Próximo</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </footer>
-
-  <script src="/assets/js/pesquisar.js"></script>
-  <script src="/assets/js/menu.js"></script>
-  <script src="/assets/js/modoEscuro.js"></script>
 </body>
-
+<script src="/assets/js/pesquisar.js"></script>
+<script src="/assets/js/menu.js"></script>
+<script src="/assets/js/modoEscuro.js"></script>
 </html>

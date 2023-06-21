@@ -61,3 +61,13 @@ input[type="text"] {
     background: var(--color-primary-click);
     transition: .5s ease-in;
 }
+
+/* nav com os elementos da paginação */
+#paginacao {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
