@@ -132,7 +132,7 @@ app.get('/resultado', (req, res) => {
 app.get('/campos', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
-    sql = "SELECT cat_dados_variaveis.nome_tabela, cat_dados_variaveis.nome_campo, cat_dados_variaveis.tipo_campo,  cat_dados_variaveis.tipo_pessoa, cat_dados_variaveis.descricao_campo, cat_dados_variaveis.ch_primaria, cat_dados_variaveis.null_campo, cat_dados_variaveis.unq, cat_dados_variaveis.volatil, cat_dados_variaveis.lgpd, cat_dados_variaveis.amostra_campo FROM cat_dados_variaveis JOIN cat_dados_tabela ON cat_dados_variaveis.id_tabela = cat_dados_tabela.id_tabela WHERE id_numerico=" + req.query.id_numerico;
+    sql = "SELECT * FROM cat_dados_variaveis JOIN cat_dados_tabela ON cat_dados_variaveis.id_tabela = cat_dados_tabela.id_tabela WHERE id_numerico=" + req.query.id_numerico;
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     db.all(sql, [], (err, rows) => {
         if (err) {
@@ -213,7 +213,6 @@ app.post('/ticket/apagar', urlencodedParser, (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     sql = "UPDATE ticket SET status='rejeitado' WHERE id_ticket=" + req.body.id_ticket;
-    console.log(sql);
     db.run(sql, [], err => {
         if (err) {
             throw err;
@@ -231,7 +230,6 @@ app.post('/ticket/aprovar', urlencodedParser, (req, res) => {
     var consultaSQL = "UPDATE ticket SET status='aprovado' WHERE id_ticket=" + req.body.id_ticket;
     var consultaUpdate = req.body.update_query;
 
-    console.log(consultaSQL);
     db.run(consultaSQL, [], erroConsulta => {
         if (erroConsulta) {
             console.error('Erro ao executar a consulta:', erroConsulta);
@@ -310,7 +308,6 @@ app.put('/attClassificacao', urlencodedParser, (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     sql = `UPDATE feedback SET classificacao_admin = ${req.body.classificacao_admin} WHERE id_numerico = ${req.body.id_numerico};`;
-    console.log(sql);
     db.run(sql, [], err => {
         if (err) {
             throw err;

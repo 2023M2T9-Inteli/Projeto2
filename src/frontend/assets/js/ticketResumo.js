@@ -30,6 +30,16 @@ var elementoResumo = document.getElementById("resumoAlteracoes");
 // Atualiza o conteúdo do elemento HTML com o valor da variável 'resumo'
 elementoResumo.innerHTML = resumo;
 
+function acionarPopup() {
+    const popup = document.querySelector('.popup');
+    popup.classList.remove('hidden');
+  }
+  
+  document.querySelector('.close-button').addEventListener('click', function () {
+    const popup = document.querySelector('.popup');
+    popup.classList.add('hidden');
+  });
+
 function enviarTicket() {
     var updateQuery = localStorage.getItem('updateQuery');
     var nome = localStorage.getItem('nome');
@@ -53,21 +63,4 @@ function enviarTicket() {
         });
 
     acionarPopup();
-}
-
-function enviarEmail(email, assunto, mensagem) {
-    const sgMail = require('@sendgrid/mail');
-    sgMail.setApiKey('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');
-    const msg = {
-        to: email,
-        from: 'nicollasisaac012@gmail.com',
-        subject: assunto,
-        text: mensagem,
-    };
-
-    sgMail.send(msg).then(() => {
-        console.log('Email enviado com sucesso');
-    }).catch((error) => {
-        console.error('Erro ao enviar o email:', error);
-    });
 }
