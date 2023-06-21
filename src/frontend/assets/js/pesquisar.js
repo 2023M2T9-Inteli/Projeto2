@@ -110,7 +110,12 @@ const pesquisa = () => {
         });
 };
 
-campoPesquisa.addEventListener('input', pesquisa);
+campoPesquisa.addEventListener('input', () => {
+    paginaAtual = 1;
+    pesquisa();
+    paginaAtualSpan.textContent = paginaAtual;
+});
+
 
 [selectConjunto, selectDadosSensiveis, selectOwner, selectSteward].forEach((select) => {
     select.addEventListener('change', (event) => {
