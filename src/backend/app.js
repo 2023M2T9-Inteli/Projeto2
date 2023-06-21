@@ -1,7 +1,6 @@
 // Importação de módulos necessários
 const express = require('express');
 const bodyParser = require('body-parser');
-const sqlstring = require('sqlstring');
 const sqlite3 = require('sqlite3').verbose();
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 

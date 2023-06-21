@@ -9,17 +9,17 @@ const paginaAtualSpan = document.getElementById('paginaAtual');
 let paginaAtual = 1;
 
 botaoVoltarPagina.addEventListener('click', () => {
-    if (paginaAtual > 1) { // Verifica se já estamos na primeira página
+    if (paginaAtual > 1) { 
         paginaAtual--;
         pesquisa(paginaAtual);
-        paginaAtualSpan.textContent = paginaAtual; // Adicione esta linha
+        paginaAtualSpan.textContent = paginaAtual; 
     }
 });
 
 botaoAvancarPagina.addEventListener('click', () => {
     paginaAtual++;
     pesquisa(paginaAtual);
-    paginaAtualSpan.textContent = paginaAtual; // Adicione esta linha
+    paginaAtualSpan.textContent = paginaAtual; 
 });
 
 
@@ -27,8 +27,11 @@ let ordenarBtn = true;
 
 formulario.addEventListener('submit', (event) => {
     event.preventDefault();
+    paginaAtual = 1; 
     pesquisa();
+    paginaAtualSpan.textContent = paginaAtual;
 });
+
 
 function updateUrlParams(param, value) {
     let urlParams = new URLSearchParams(window.location.search);
@@ -90,10 +93,8 @@ const pesquisa = () => {
         .then((response) => response.json())
         .then((resultados) => {
             const resultadosDiv = document.getElementById('resultados');
-            if (resultadosDiv) resultadosDiv.parentNode.removeChild(resultadosDiv);
+            if (resultadosDiv) resultadosDiv.innerHTML = '';
 
-            const novaDiv = document.createElement('div');
-            novaDiv.id = 'resultados';
             resultados.forEach((resultado) => {
                 const valores = Object.values(resultado).join(' ').toLowerCase();
                 if (termosPesquisa.every((termo) => valores.includes(termo.toLowerCase()))) {
@@ -103,11 +104,9 @@ const pesquisa = () => {
                     divResultado.innerHTML = `<p>${nome_tabela}</p><span class='descricao'>Descrição: ${conteudo_tabela}</span><br>Nome Owner Tabela: ${nome_data_owner} <br>Conjunto de Dados: ${conjunto_de_dados}`;
                     divResultado.classList.add('area_resultados');
                     divResultado.addEventListener('click', () => (window.location.href = `resultado.html?id_numerico=${id_numerico}&admin=${admin}`));
-                    novaDiv.appendChild(divResultado);
+                    resultadosDiv.appendChild(divResultado);
                 }
-                paginaAtualSpan.textContent = paginaAtual;
             });
-            document.body.appendChild(novaDiv);
         });
 };
 
