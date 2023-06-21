@@ -49,7 +49,9 @@ const mostrarFiltro = () => {
     if (!status) {
         [selectConjunto, selectDadosSensiveis, selectOwner, selectSteward].forEach((select) => (select.selectedIndex = 0));
         window.history.replaceState(null, null, window.location.pathname);
-        pesquisa();
+        paginaAtual = 1;
+        pesquisa(paginaAtual);
+        paginaAtualSpan.textContent = paginaAtual;
         alert('O filtro foi resetado!');
     }
 };
@@ -61,10 +63,11 @@ const getParameterByName = (name) => {
 };
 
 const pesquisa = (paginaAtual) => {
-    const termosPesquisa = campoPesquisa.value.trim().split(' ');
+    const termosIgnorados = ['tabela', 'de', 'e'];
+    const termosPesquisa = campoPesquisa.value.trim().split(' ').filter(termo => !termosIgnorados.includes(termo.toLowerCase()));
     const termoPesquisa = termosPesquisa.join('+');
     const urlParams = new URLSearchParams(window.location.search);
-    const { admin, conjuntoDeDados, dadosSensiveis, owner, steward} = Object.fromEntries(urlParams.entries());
+    const { admin, conjuntoDeDados, dadosSensiveis, owner, steward } = Object.fromEntries(urlParams.entries());
     let url = `/pesquisa?term=${termoPesquisa}&admin=${admin}${conjuntoDeDados ? `&conjuntoDeDados=${conjuntoDeDados}` : ''}${dadosSensiveis ? `&dadosSensiveis=${dadosSensiveis}` : ''
         }${owner ? `&owner=${owner}` : ''}${steward ? `&steward=${steward}` : ''}&pagina=${paginaAtual}`;
     fetch(url)
@@ -97,7 +100,10 @@ campoPesquisa.addEventListener('input', () => {
         event.preventDefault();
         const param = select.id.replace('select', '');
         updateUrlParams(param.charAt(0).toLowerCase() + param.slice(1), select.value);
-        pesquisa();
+        paginaAtual = 1;
+        pesquisa(paginaAtual);
+        paginaAtualSpan.textContent = paginaAtual;
+        console.log(paginaAtualSpan)
     });
 });
 
@@ -106,5 +112,7 @@ window.onload = () => {
     if (searchTerm) {
         document.getElementById('pesquisa').value = decodeURIComponent(searchTerm);
     }
+    paginaAtual = 1;
     pesquisa(paginaAtual);
+    paginaAtualSpan.textContent = paginaAtual;
 };
