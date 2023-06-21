@@ -30,6 +30,10 @@ var elementoResumo = document.getElementById("resumoAlteracoes");
 // Atualiza o conteúdo do elemento HTML com o valor da variável 'resumo'.
 elementoResumo.innerHTML = resumo;
 
+function cancelarTicket() {
+    window.location.href = `resultado.html?id_numerico=${idTabela}&admin=${admin}`;
+}
+
 // Função para enviar ticket
 function enviarTicket() {
     // Recupera as informações armazenadas no local storage
