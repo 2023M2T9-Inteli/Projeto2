@@ -86,3 +86,6 @@ npm start
 Aqui estão as referências usadas no projeto:
 
 1. <https://creativecommons.org/share-your-work/>
+2. <https://fontawesome.com/search>
+3. <https://getbootstrap.com/docs/5.0/getting-started/introduction/>
+4. <https://www.postman.com>
