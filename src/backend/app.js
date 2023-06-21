@@ -1,7 +1,6 @@
 // Importação de módulos necessários
 const express = require('express');
 const bodyParser = require('body-parser');
-const sqlstring = require('sqlstring');
 const sqlite3 = require('sqlite3').verbose();
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -41,13 +40,12 @@ app.get('/pesquisa', (req, res) => {
     const offset = (pagina - 1) * registrosPorPagina;
 
     // Separação dos termos de pesquisa em um array
-    const termosPesquisa = req.query.termo.trim().split(" ");
+    const termosPesquisa = req.query.term.trim().split(" ");
 
     // Filtro do conjunto de dados
     const conjuntoDeDadosFiltro = req.query.conjuntoDeDados;
     const dadosSensiveisFiltro = req.query.dadosSensiveis;
     const ownerFiltro = req.query.owner;
-    const ordemFiltro = req.query.ordem;
 
     // Criação de um array de termos com "LIKE" para a consulta SQL
     const termosLike = termosPesquisa.map((termo) => `%${termo}%`);
@@ -84,15 +82,10 @@ FROM
         params.push(ownerFiltro);
     }
 
-    if (ordemFiltro) {
-        sql += `
-            ORDER BY 
-            feedback.classificacao_admin, feedback.qtd_like_colaborador DESC`;
-    } else {
-        sql += `
-        ORDER BY 
-        feedback.classificacao_admin, feedback.qtd_like_colaborador ASC`;
-    }
+    sql += `ORDER BY 
+        CASE WHEN feedback.classificacao_admin IS NULL OR feedback.classificacao_admin = 0 THEN 1 ELSE 0 END,
+        feedback.classificacao_admin DESC,
+        feedback.qtd_like_colaborador DESC`;
 
     // Aplicação da paginação na consulta SQL com LIMIT e OFFSET
     sql += ' LIMIT ? OFFSET ?';
@@ -132,7 +125,7 @@ app.get('/resultado', (req, res) => {
 app.get('/campos', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
-    sql = "SELECT cat_dados_variaveis.nome_tabela, cat_dados_variaveis.nome_campo, cat_dados_variaveis.tipo_campo,  cat_dados_variaveis.tipo_pessoa, cat_dados_variaveis.descricao_campo, cat_dados_variaveis.ch_primaria, cat_dados_variaveis.null_campo, cat_dados_variaveis.unq, cat_dados_variaveis.volatil, cat_dados_variaveis.lgpd, cat_dados_variaveis.amostra_campo FROM cat_dados_variaveis JOIN cat_dados_tabela ON cat_dados_variaveis.id_tabela = cat_dados_tabela.id_tabela WHERE id_numerico=" + req.query.id_numerico;
+    sql = "SELECT * FROM cat_dados_variaveis JOIN cat_dados_tabela ON cat_dados_variaveis.id_tabela = cat_dados_tabela.id_tabela WHERE id_numerico=" + req.query.id_numerico;
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     db.all(sql, [], (err, rows) => {
         if (err) {
@@ -208,12 +201,11 @@ app.get('/ticket/pendente', (req, res) => {
     db.close();
 });
 
-app.post('/ticket/apagar', urlencodedParser, (req, res) => {
+app.put('/ticket/apagar', urlencodedParser, (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     sql = "UPDATE ticket SET status='rejeitado' WHERE id_ticket=" + req.body.id_ticket;
-    console.log(sql);
     db.run(sql, [], err => {
         if (err) {
             throw err;
@@ -223,7 +215,7 @@ app.post('/ticket/apagar', urlencodedParser, (req, res) => {
     res.end();
 });
 
-app.post('/ticket/aprovar', urlencodedParser, (req, res) => {
+app.put('/ticket/aprovar', urlencodedParser, (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
@@ -231,7 +223,6 @@ app.post('/ticket/aprovar', urlencodedParser, (req, res) => {
     var consultaSQL = "UPDATE ticket SET status='aprovado' WHERE id_ticket=" + req.body.id_ticket;
     var consultaUpdate = req.body.update_query;
 
-    console.log(consultaSQL);
     db.run(consultaSQL, [], erroConsulta => {
         if (erroConsulta) {
             console.error('Erro ao executar a consulta:', erroConsulta);
@@ -310,7 +301,6 @@ app.put('/attClassificacao', urlencodedParser, (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     sql = `UPDATE feedback SET classificacao_admin = ${req.body.classificacao_admin} WHERE id_numerico = ${req.body.id_numerico};`;
-    console.log(sql);
     db.run(sql, [], err => {
         if (err) {
             throw err;
@@ -341,7 +331,6 @@ app.put('/attJoinha', urlencodedParser, (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     sql = `UPDATE feedback SET qtd_like_colaborador = ${req.body.qtd_like_colaborador} WHERE id_numerico = ${req.body.id_numerico};`;
-    console.log(sql);
     db.run(sql, [], err => {
         if (err) {
             throw err;
