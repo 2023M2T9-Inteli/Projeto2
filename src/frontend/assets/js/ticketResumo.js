@@ -30,16 +30,6 @@ var elementoResumo = document.getElementById("resumoAlteracoes");
 // Atualiza o conteúdo do elemento HTML com o valor da variável 'resumo'
 elementoResumo.innerHTML = resumo;
 
-function acionarPopup() {
-    const popup = document.querySelector('.popup');
-    popup.classList.remove('hidden');
-  }
-  
-  document.querySelector('.close-button').addEventListener('click', function () {
-    const popup = document.querySelector('.popup');
-    popup.classList.add('hidden');
-  });
-
 function enviarTicket() {
     var updateQuery = localStorage.getItem('updateQuery');
     var nome = localStorage.getItem('nome');
@@ -64,3 +54,14 @@ function enviarTicket() {
 
     acionarPopup();
 }
+
+function acionarPopup() {
+    const popup = document.querySelector('.popup');
+    popup.classList.remove('hidden');
+  }
+  
+  document.querySelector('.close-button').addEventListener('click', function () {
+    const popup = document.querySelector('.popup');
+    popup.classList.add('hidden');
+    window.location.href = `home.html?admin=${admin}`;
+  });
