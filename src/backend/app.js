@@ -206,6 +206,7 @@ app.put('/ticket/apagar', urlencodedParser, (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     sql = "UPDATE ticket SET status='rejeitado' WHERE id_ticket=" + req.body.id_ticket;
+    console.log(sql)
     db.run(sql, [], err => {
         if (err) {
             throw err;
