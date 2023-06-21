@@ -1,3 +1,4 @@
+
 html {
     background: var(--color-white);
 }
@@ -17,8 +18,6 @@ main {
     border: 1px solid var(--color-primary);
     border-radius: 20px;
     padding: 1rem;
-    margin: auto;
-    margin-bottom: 1rem;
 }
 
 .col-md-12 p {
@@ -26,9 +25,10 @@ main {
     padding: 0;
     width: 60%;
     margin: auto;
+    font-size: 15px;
 }
 
-.table .row {
+.row {
     margin-bottom: 1rem;
 }
 
@@ -47,11 +47,6 @@ main {
 #LinhaModelo {
     display: none;
 }
-
-#infoAdicional {
-    text-align: left;
-}
-
 /* Colunas  */
 .col-md-3-indice {
     width: 10%;
@@ -61,18 +56,12 @@ main {
     width: 30%;
 }
 
-.col-md-3-descricao, .col-md-3-nome {
-    text-align: initial;
+.col-md-3-descricao, .col-md-3-nome, #infoAdicional {
+    text-align: left;
 }
-
-.mais-info p {
-    font-size: 15px;
-    transition: .5s ease-in;
-}
-
 /* Rodapé */
 footer {
-    padding-bottom: .5rem;
+    margin: 1rem;
     text-align: center;
 }
 
