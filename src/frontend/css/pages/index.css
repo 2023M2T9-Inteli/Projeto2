@@ -1,71 +1,43 @@
-:root {
-    --font-size-small: 18px;
-    --font-size-medium: 20px;
-    --font-size-large: 22px;
-
-    --font-family: 'Poppins', sans-serif;
-
-    --color-primary: #07B2FD;
-    --color-white: #FFFFFF;
-    --color-grey-dark: #3A404A;
-    --color-grey-light: #424750;
-
-    --spacing-small: 8px;
-    --spacing-medium: 16px;
-    --spacing-large: 24px;
-}
-
-html,
-body {
+html, body {
     height: 100vh;
-    width: 100vw;
 }
 
 .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-top: 5%;
     background: var(--color-primary);
     width: 60%;
     height: 70%;
-    margin: auto;
-    border-radius: 10px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
+    border-radius: 10px;
 }
 
 .row {
     align-items: center;
     width: 100%;
-    height: 100%;
 }
 
-.illustration.col-md-6 {
-    align-items: center;
+.illustration {
     display: flex;
     justify-content: center;
+    max-width: 90%;
+    height: auto;
 }
 
-.button.col-md-6 {
-    align-items: center;
+.button {
     height: 100%;
     display: flex;
-    justify-content: center;
 }
 
 .container-button {
     background-color: var(--color-white);
     border-radius: 10px;
-    padding: 2rem;
+    padding: 5%;
     margin: auto;
     height: 70%;
     width: 70%;
-    text-align: center;
     display: flex;
     flex-direction: column;
+    text-align: center;
     justify-content: center;
 }
 
@@ -74,37 +46,23 @@ main h2 {
     font-weight: bold;
 }
 
-.button-collaborator.btn.btn-primary {
+.button-collaborator {
     background-color: var(--color-white);
     border-color: var(--color-primary);
-    border-style: solid;
     color: var(--color-primary);
     border-radius: 10px;
-    width: 100%;
     margin-bottom: var(--spacing-medium);
 }
 
-.button-admin.btn.btn-primary {
+.button-admin {
     background-color: var(--color-primary);
     color: var(--color-white);
     border: none;
     border-radius: 10px;
-    width: 100%;
 }
 
-.button-collaborator.btn.btn-primary:hover {
+.button-collaborator:hover, .button-admin:hover {
     background-color: #07b3fd8c;
     color: var(--color-white);
     transition: .1s ease-in;
-}
-
-.button-admin.btn.btn-primary:hover {
-    background-color: #07b3fd8c;
-    color: var(--color-white);
-    transition: .1s ease-in;
-}
-
-.illustration {
-    max-width: 90%;
-    height: auto;
 }
