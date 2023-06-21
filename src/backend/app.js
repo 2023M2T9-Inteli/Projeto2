@@ -207,7 +207,7 @@ app.get('/ticket/pendente', (req, res) => {
     db.close();
 });
 
-app.post('/ticket/apagar', urlencodedParser, (req, res) => {
+app.put('/ticket/apagar', urlencodedParser, (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
@@ -221,7 +221,7 @@ app.post('/ticket/apagar', urlencodedParser, (req, res) => {
     res.end();
 });
 
-app.post('/ticket/aprovar', urlencodedParser, (req, res) => {
+app.put('/ticket/aprovar', urlencodedParser, (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco

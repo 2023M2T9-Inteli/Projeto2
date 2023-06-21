@@ -22,13 +22,10 @@ botaoAvancarPagina.addEventListener('click', () => {
     paginaAtualSpan.textContent = paginaAtual; 
 });
 
-
-let ordenarBtn = true;
-
 formulario.addEventListener('submit', (event) => {
     event.preventDefault();
     paginaAtual = 1; 
-    pesquisa();
+    pesquisa(paginaAtual);
     paginaAtualSpan.textContent = paginaAtual;
 });
 
@@ -78,7 +75,7 @@ const getParameterByName = (name) => {
     return !results ? null : !results[2] ? '' : results[2];
 };
 
-const pesquisa = () => {
+const pesquisa = (paginaAtual) => {
     const termosPesquisa = campoPesquisa.value.trim().split(' ');
     const termoPesquisa = termosPesquisa.join('+');
 
@@ -112,7 +109,7 @@ const pesquisa = () => {
 
 campoPesquisa.addEventListener('input', () => {
     paginaAtual = 1;
-    pesquisa();
+    pesquisa(paginaAtual);
     paginaAtualSpan.textContent = paginaAtual;
 });
 
@@ -139,5 +136,5 @@ window.onload = () => {
         ordem = 'true';
     }
 
-    pesquisa();
+    pesquisa(paginaAtual);
 };
