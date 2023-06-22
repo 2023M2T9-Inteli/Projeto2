@@ -27,34 +27,38 @@ app.use(bodyParser.text({ type: 'text/plain' }));
 // Configuração do servidor para lidar com requisições codificadas em URL
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// endpoint responsável pela pesquisa
+// Início do endpoint "/pesquisa" que utiliza o método GET
 app.get('/pesquisa', (req, res) => {
+    // Configuração do código de status HTTP para 200 (Ok)
     res.statusCode = 200;
+    // Configuração dos headers para permitir requisições de qualquer origem
     res.setHeader('Access-Control-Allow-Origin', '*');
 
-    // Definição da quantidade de registros por página
+    // Define a quantidade de registros que serão retornados por página
     const registrosPorPagina = 10;
-    // Recupera o número da página a partir dos parâmetros da requisição, caso não tenha, define como 1
+    // Extrai o número da página dos parâmetros da requisição, se não for fornecido, define como 1
     let pagina = parseInt(req.query.pagina);
+    // Calcula a quantidade de registros a serem pulados na consulta SQL
     const offset = (pagina - 1) * registrosPorPagina;
 
-    // Separação dos termos de pesquisa em um array
+    // Extrai os termos de pesquisa da requisição e os divide em um array de termos
     const termosPesquisa = req.query.term.trim().split(" ");
 
-    // Filtro do conjunto de dados
+    // Extrai os parâmetros de filtro da requisição
     const conjuntoDeDadosFiltro = req.query.conjuntoDeDados;
     const dadosSensiveisFiltro = req.query.dadosSensiveis;
     const ownerFiltro = req.query.owner;
     const stewardFiltro = req.query.steward;
 
-    // Criação de um array de termos com "LIKE" para a consulta SQL
+    // Cria um array de termos para a cláusula SQL "LIKE"
     const termosLike = termosPesquisa.map((termo) => `%${termo}%`);
 
-    // Criação de uma string com os termos de pesquisa para a cláusula "WHERE" da consulta SQL
+    // Cria uma string com os termos de pesquisa para a cláusula "WHERE" da consulta SQL
     const termosParams = termosPesquisa
         .map(() => '(LOWER(cat_dados_tabela.nome_tabela) LIKE ? OR LOWER(cat_dados_tabela.conjunto_de_dados) LIKE ? OR LOWER(cat_dados_tabela.conteudo_tabela) LIKE ? OR LOWER(cat_dados_owner.nome_data_owner) LIKE ?)')
         .join(' OR ');
 
+    // Construção inicial da consulta SQL
     let sql = `SELECT 
     cat_dados_tabela.*, cat_dados_owner.*, cat_dados_conexoes.*
 FROM 
@@ -63,49 +67,61 @@ FROM
     INNER JOIN cat_dados_conexoes ON cat_dados_tabela.id_tabela = cat_dados_conexoes.id_tabela
     INNER JOIN feedback ON cat_dados_tabela.id_numerico = feedback.id_numerico`;
 
+    // Array de parâmetros para a consulta SQL
     const params = [...termosLike, ...termosLike, ...termosLike, ...termosLike];
 
+    // Adiciona a cláusula WHERE à consulta SQL
     sql += ' WHERE ' + termosParams;
 
+    // Adiciona condições de filtro à consulta SQL, se aplicável
     if (conjuntoDeDadosFiltro && typeof conjuntoDeDadosFiltro === 'string') {
         sql += ' AND cat_dados_tabela.conjunto_de_dados = ?';
         params.push(conjuntoDeDadosFiltro);
     }
 
+    // Semelhante ao acima, mas para dados sensíveis
     if (dadosSensiveisFiltro && typeof dadosSensiveisFiltro === 'string') {
         sql += ' AND cat_dados_tabela.dados_sensiveis_tabela = ?';
         params.push(dadosSensiveisFiltro);
     }
 
+    // Semelhante ao acima, mas para o proprietário dos dados
     if (ownerFiltro && typeof ownerFiltro === 'string') {
         sql += ' AND cat_dados_owner.nome_data_owner = ?';
         params.push(ownerFiltro);
     }
 
+    // Semelhante ao acima, mas para o steward dos dados
     if (stewardFiltro && typeof stewardFiltro === 'string') {
         sql += ' AND cat_dados_owner.nome_data_steward = ?';
         params.push(stewardFiltro);
     }
 
+    // Adiciona a ordenação à consulta SQL
     sql += `ORDER BY 
         CASE WHEN feedback.classificacao_admin IS NULL OR feedback.classificacao_admin = 0 THEN 1 ELSE 0 END,
         feedback.classificacao_admin DESC,
         feedback.qtd_like_colaborador DESC`;
 
-    // Aplicação da paginação na consulta SQL com LIMIT e OFFSET
+    // Adiciona limitação e offset à consulta SQL para implementar a paginação
     sql += ' LIMIT ? OFFSET ?';
     params.push(registrosPorPagina);
     params.push(offset);
 
-    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    // Cria uma nova conexão com o banco de dados
+    var db = new sqlite3.Database(DBPATH);
+    // Executa a consulta SQL e retorna os resultados
     db.all(sql, params, (err, rows) => {
+        // Caso haja erro, loga o erro e retorna uma mensagem de erro
         if (err) {
             console.error(err);
             return res.status(500).send('Erro interno do servidor.');
         }
+        // Se não houver erro, retorna os resultados da consulta como resposta JSON
         res.json(rows);
     });
 });
+
 
 app.get('/resultado', (req, res) => {
     res.statusCode = 200;
