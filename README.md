@@ -44,11 +44,13 @@ Nosso principal objetivo é melhorar a usabilidade do PanPedia, tornando-o mais 
 
 ## 💻 Configuração para desenvolvimento
 
+- <a href="https://n4kqrp-5500.csb.app/index.html"> Aqui está o link para o site do prjeto </a>
+
 Aqui encontram-se todas as instruções necessárias para a instalação de todos os programas, bibliotecas e ferramentas imprescindíveis para a configuração do ambiente de desenvolvimento.
 
 1.  Baixar e instalar o node.js:  [https://nodejs.org/pt-br/](https://nodejs.org/pt-br/) (versão 16.15.1 LTS)
 2. Clone o repositório em questão.
-3.  No modo administrador, abra o "prompt de comando" ou o "terminal" e, após,  abra a pasta "src/backend" no diretório raiz do repositório clonado e digite o segundo comando:
+3.  No modo administrador, abra o "prompt de comando" ou o "terminal" e, após,  abra a pasta "src" no diretório raiz do repositório clonado e digite o segundo comando:
 
 ```sh
 npm install
@@ -61,6 +63,7 @@ npm start
 ```
 5. Agora você pode acessar a aplicação através do link http://localhost:127.0.0.1/ segurando o botão "ctrl" e clicando com o botão esquedo do mouse ou touch pad;
 6. O servidor está online.
+7. Caso queira algo mais rápido para testar o site.<a href="https://n4kqrp-5500.csb.app/index.html"> Aqui está o link para o site do prjeto </a>
 
 ## 🗃 Histórico de lançamentos
 
