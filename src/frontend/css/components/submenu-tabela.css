@@ -1,27 +1,11 @@
-:root {
-  --font-size-small: 18px;
-  --font-size-medium: 20px;
-  --font-size-large: 22px;
-
-  --font-family: 'Poppins', sans-serif;
-
-  --color-primary: #07B2FD;
-  --color-white: #FFFFFF;
-  --color-grey-dark: #3A404A;
-  --color-grey-light: #424750;
-
-  --spacing-small: 8px;
-  --spacing-medium: 16px;
-  --spacing-large: 24px;
-}
-
+/* Título da tabela */
 #tituloTabela {
   display: flex;
   justify-content: center;
   font-weight: bold;
   color: var(--color-primary);
 }
-
+/* Título da tabela */
 .container-submenu {
   height: 15vh;
   display: grid;
@@ -31,6 +15,7 @@
 
 .container-submenu .feedback {
   display: flex;
+  
 }
 
 .container-submenu .feedback button {
