@@ -12,10 +12,9 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
 }
-
+/* div que inclui os botoões de curtir ou não */
 .container-submenu .feedback {
   display: flex;
-  
 }
 
 .container-submenu .feedback button {
@@ -24,8 +23,9 @@
   margin-left: 1vw;
   border: none;
 }
-
+/* div que inclui os botoões de ir para geral e campos */
 .container-submenu .general {
+  position: absolute;
   justify-self: center;
   justify-content: space-between;
   min-width: 13vw;
@@ -45,14 +45,14 @@
   margin-bottom: 0;
 }
 
-.general a {
+.container-submenu .general a {
   text-decoration: none;
 }
-
+/* destaca o botão da tela onde o usuário ja está */
 .active p {
   color: var(--color-primary);
 }
-
+/* div com o botão de solicitar o acesso */
 .container-submenu .access {
   justify-self: end;
 }
@@ -73,7 +73,7 @@
   color: var(--color-grey-dark);
   font-size: var(--font-size-small);
 }
-
+/* avaliação em estrelas da governança */
 .rate {
   margin-top: 0.4vw;
   margin-left: 1vw;

@@ -1,31 +1,32 @@
+/* define a cor html com a variável --color-white */
 html {
   background: var(--color-white);
 }
-
+/* define a altura do body como 100% da viewport */
 body {
   min-height: 100vh;
 }
-
+/* define a largura de 90% da viewport e centraliza a main */
 main {
   width: 90%;
   margin: auto;
   margin-top: 1.5rem;
 }
 
+#tituloTabela {
+  text-align: center;
+}
+/* tipos dos metadados da tabela */
 p {
   font-size: 1rem;
   margin-top: 1rem;
 }
-
-#tituloTabela {
-  text-align: center;
-}
-
+/* class com todo o conteúdo do ticket */
 .content {
   margin-top: 1.5rem;
   color: var(--color-grey-dark);
 }
-
+/* textarea estilizada somente para os metadados do geral */
 .content textarea {
   padding: 1rem;
   border-radius: 20px;
@@ -35,24 +36,16 @@ p {
   background-color: var(--color-white);
   resize: none;
 }
-
-#descricao_Campo {
-  font-size: .7rem;
-}
-
+/* ocultar modelo de linha */
 #LinhaModelo {
   display: none;
 }
-
-#botao {
-  cursor: pointer;
-}
-
+/* botão de mais informações dos campos */
 .maisInfo {
   display: flex;
   justify-content: center;
 }
-
+/* mais informações dos campos */
 .mais-info {
   margin-bottom: 2rem;
   text-align: center;
@@ -73,7 +66,7 @@ p {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-
+/* botão que para revisar o ticket para enviar */
 #RevisarBtn {
   background: var(--color-primary);
   color: var(--color-grey-dark);
@@ -82,7 +75,7 @@ p {
   border-radius: 20px;
   margin-top: 1rem;
 }
-
+/* linha divisória entre os campos da tabela */
 .divisoria {
   border-top: 1px solid var(--color-grey-dark);
   width: 100%;

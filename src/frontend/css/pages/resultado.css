@@ -2,7 +2,7 @@
 html {
   background: var(--color-white);
 }
-/* define a largura de 90% e centraliza a main */
+/* define a largura de 90% da viewport e centraliza a main */
 main {
   width: 90%;
   margin: auto;
