@@ -1,28 +1,29 @@
+/* define a cor html com a variável --color-white */
 html {
     background: var(--color-white);
 }
-
+/* define a altura do body como 100% da viewport */
 body {
     min-height: 100vh;
 }
-
+/* define a largura de 90% da viewport e centraliza a main */
 main {
     width: 90%;
     margin: auto;
-}
-
-.content {
-    padding: 1.5rem;
-    border: 1px solid var(--color-primary);
-    border-radius: 20px;
-    margin-top: 1rem;
 }
 
 #tituloTabela{
     text-align: center;
     margin-top: 2rem;
 }
-
+/* div com o ticket */
+.content {
+    padding: 1.5rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 20px;
+    margin-top: 1rem;
+}
+/* botão de enviar ticket */
 .btn {
     background: var(--color-primary);
     color: var(--color-grey-dark);
@@ -30,5 +31,4 @@ main {
     border: none;
     border-radius: 20px;
     margin-top: 1rem;
-    margin-right: 1rem;
 }

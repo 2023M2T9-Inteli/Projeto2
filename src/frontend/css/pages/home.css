@@ -1,9 +1,9 @@
-/* define a altura do body como 100%*/
+/* define a altura do body como 100% da viewport */
 body {
     font-family: var(--font-family);
     height: 100vh;
 }
-/* define a altura do main como 90%*/
+/* define a altura do main como 90% da viewport*/
 main {
     height: 90vh;
     display: flex;

@@ -1,34 +1,30 @@
+/* define a altura do body como 100% da viewport */
 body {
     background-color: var(--color-white);
     font-family: var(--font-family);
     min-height: 100vh;
 }
-
+/* titulo da tabela */
 #tabela {
     margin-top: 1rem;
     text-align: center;
-}
-
-.fa-2xs{
-    color: var(--color-red);
 }
 
 main h1 {
     text-align: center;
     size: var(--font-size-large);
 }
-
-p {
-    align-items: center;
-    size: var(--font-size-small);
+/* asterisco preenchimento obrigatório */
+.fa-2xs{
+    color: var(--color-red);
 }
-
+/* formulário que será enviado para fazer o ticket */
 form {
     width: 60%;
     margin: auto;
     margin-top: 3rem;
 }
-
+/* campos de preenchimento */
 input, textarea{
     padding: 1rem 1.5rem;
     border: 1px solid var(--color-primary);
@@ -38,7 +34,7 @@ input, textarea{
     color: var(--color-grey-dark);
     margin-bottom: 1rem;
 }
-
+/* div com a opção de receber emails sobre o ticket */
 #receber-email{
     margin-top: 1rem;
     display: flex;
