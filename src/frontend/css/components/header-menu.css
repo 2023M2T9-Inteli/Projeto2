@@ -127,3 +127,7 @@ header i {
     color: var(--color-grey-dark);
     text-decoration: none;
 }
+
+.linkIndex {
+    text-decoration: none;
+}
