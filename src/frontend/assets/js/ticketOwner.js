@@ -72,7 +72,8 @@ fetch(url)
                         // Trata erros de requisição
                         console.error('Erro:', error);
                     });
-                location.reload()  // Recarrega a página
+                // Recarrega a página
+                location.reload()  
             })
 
             // Define a funcionalidade do botão para aprovar o ticket
@@ -94,7 +95,8 @@ fetch(url)
                         // Trata erros de requisição
                         console.error('Erro:', error);
                     });
-                location.reload()  // Recarrega a página
+                // Recarrega a página
+                location.reload()  
             })
 
             // Adiciona o novo ticket ao elemento 'ticketsSolicitados'

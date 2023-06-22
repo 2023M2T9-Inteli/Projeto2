@@ -35,8 +35,7 @@ app.get('/pesquisa', (req, res) => {
     // Definição da quantidade de registros por página
     const registrosPorPagina = 10;
     // Recupera o número da página a partir dos parâmetros da requisição, caso não tenha, define como 1
-    const pagina = req.query.pagina ? parseInt(req.query.pagina) : 1;
-    // Calcula o offset com base na página atual e a quantidade de registros por página
+    let pagina = parseInt(req.query.pagina);
     const offset = (pagina - 1) * registrosPorPagina;
 
     // Separação dos termos de pesquisa em um array
@@ -46,13 +45,14 @@ app.get('/pesquisa', (req, res) => {
     const conjuntoDeDadosFiltro = req.query.conjuntoDeDados;
     const dadosSensiveisFiltro = req.query.dadosSensiveis;
     const ownerFiltro = req.query.owner;
+    const stewardFiltro = req.query.steward;
 
     // Criação de um array de termos com "LIKE" para a consulta SQL
     const termosLike = termosPesquisa.map((termo) => `%${termo}%`);
 
     // Criação de uma string com os termos de pesquisa para a cláusula "WHERE" da consulta SQL
     const termosParams = termosPesquisa
-        .map(() => '(cat_dados_tabela.nome_tabela LIKE ? OR cat_dados_tabela.conjunto_de_dados LIKE ? OR cat_dados_tabela.conteudo_tabela LIKE ? OR cat_dados_owner.nome_data_owner LIKE ? COLLATE NOCASE)')
+        .map(() => '(LOWER(cat_dados_tabela.nome_tabela) LIKE ? OR LOWER(cat_dados_tabela.conjunto_de_dados) LIKE ? OR LOWER(cat_dados_tabela.conteudo_tabela) LIKE ? OR LOWER(cat_dados_owner.nome_data_owner) LIKE ?)')
         .join(' OR ');
 
     let sql = `SELECT 
@@ -67,19 +67,24 @@ FROM
 
     sql += ' WHERE ' + termosParams;
 
-    if (conjuntoDeDadosFiltro) {
+    if (conjuntoDeDadosFiltro && typeof conjuntoDeDadosFiltro === 'string') {
         sql += ' AND cat_dados_tabela.conjunto_de_dados = ?';
         params.push(conjuntoDeDadosFiltro);
     }
 
-    if (dadosSensiveisFiltro) {
+    if (dadosSensiveisFiltro && typeof dadosSensiveisFiltro === 'string') {
         sql += ' AND cat_dados_tabela.dados_sensiveis_tabela = ?';
         params.push(dadosSensiveisFiltro);
     }
 
-    if (ownerFiltro) {
+    if (ownerFiltro && typeof ownerFiltro === 'string') {
         sql += ' AND cat_dados_owner.nome_data_owner = ?';
         params.push(ownerFiltro);
+    }
+
+    if (stewardFiltro && typeof stewardFiltro === 'string') {
+        sql += ' AND cat_dados_owner.nome_data_steward = ?';
+        params.push(stewardFiltro);
     }
 
     sql += `ORDER BY 
@@ -206,6 +211,7 @@ app.put('/ticket/apagar', urlencodedParser, (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var db = new sqlite3.Database(DBPATH); // Abre o banco
     sql = "UPDATE ticket SET status='rejeitado' WHERE id_ticket=" + req.body.id_ticket;
+    console.log(sql)
     db.run(sql, [], err => {
         if (err) {
             throw err;
