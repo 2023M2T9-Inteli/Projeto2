@@ -7,25 +7,33 @@ const paginaAtualSpan = document.getElementById('paginaAtual');
 
 let paginaAtual = 1;
 
+function chamaPesquisa(valor) {
+    if (valor == -1) {
+        paginaAtual--;
+    }
+    else if (valor == 1) {
+        paginaAtual++;
+    }
+    else {
+        paginaAtual = 1;
+    }
+    pesquisa(paginaAtual);
+    paginaAtualSpan.textContent = paginaAtual;
+}
+
 botaoVoltarPagina.addEventListener('click', () => {
     if (paginaAtual > 1) {
-        paginaAtual--;
-        pesquisa(paginaAtual);
-        paginaAtualSpan.textContent = paginaAtual;
+        chamaPesquisa(-1);
     }
 });
 
 botaoAvancarPagina.addEventListener('click', () => {
-    paginaAtual++;
-    pesquisa(paginaAtual);
-    paginaAtualSpan.textContent = paginaAtual;
+    chamaPesquisa(1);
 });
 
 formulario.addEventListener('submit', (event) => {
     event.preventDefault();
-    paginaAtual = 1;
-    pesquisa(paginaAtual);
-    paginaAtualSpan.textContent = paginaAtual;
+    chamaPesquisa();
 });
 
 function updateUrlParams(param, value) {
@@ -49,9 +57,7 @@ const mostrarFiltro = () => {
     if (!status) {
         [selectConjunto, selectDadosSensiveis, selectOwner, selectSteward].forEach((select) => (select.selectedIndex = 0));
         window.history.replaceState(null, null, window.location.pathname);
-        paginaAtual = 1;
-        pesquisa(paginaAtual);
-        paginaAtualSpan.textContent = paginaAtual;
+        chamaPesquisa();
         alert('O filtro foi resetado!');
     }
 };
@@ -90,9 +96,7 @@ const pesquisa = (paginaAtual) => {
 };
 
 campoPesquisa.addEventListener('input', () => {
-    paginaAtual = 1;
-    pesquisa(paginaAtual);
-    paginaAtualSpan.textContent = paginaAtual;
+    chamaPesquisa();
 });
 
 [selectConjunto, selectDadosSensiveis, selectOwner, selectSteward].forEach((select) => {
@@ -100,9 +104,7 @@ campoPesquisa.addEventListener('input', () => {
         event.preventDefault();
         const param = select.id.replace('select', '');
         updateUrlParams(param.charAt(0).toLowerCase() + param.slice(1), select.value);
-        paginaAtual = 1;
-        pesquisa(paginaAtual);
-        paginaAtualSpan.textContent = paginaAtual;
+        chamaPesquisa();
         console.log(paginaAtualSpan)
     });
 });
@@ -112,7 +114,5 @@ window.onload = () => {
     if (searchTerm) {
         document.getElementById('pesquisa').value = decodeURIComponent(searchTerm);
     }
-    paginaAtual = 1;
-    pesquisa(paginaAtual);
-    paginaAtualSpan.textContent = paginaAtual;
+    chamaPesquisa();
 };
