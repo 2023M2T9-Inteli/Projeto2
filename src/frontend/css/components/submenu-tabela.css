@@ -16,7 +16,6 @@
 }
 
 #tituloTabela {
-  margin-top: 2rem;
   display: flex;
   justify-content: center;
   font-weight: bold;
@@ -32,30 +31,24 @@
 
 .container-submenu .feedback {
   display: flex;
-  align-items: baseline;
 }
 
 .container-submenu .feedback button {
   color: var(--color-grey-dark);
   background: transparent;
-  margin-left: 1rem;
+  margin-left: 1vw;
   border: none;
 }
 
 .container-submenu .general {
   justify-self: center;
   justify-content: space-between;
-  min-width: 13%;
-  position: absolute;
+  min-width: 13vw;
   padding-top: .4rem;
   padding-bottom: .4rem;
   padding-left: 1rem;
   padding-right: 1rem;
   border-radius: 10px;
-  flex-grow: 1;
-  background-color: transparent;
-  color: var(--color-grey-dark);
-  outline: 0;
   display: flex;
   cursor: pointer;
   -webkit-box-shadow: 2px 6px 10px 0px rgba(0, 0, 0, 0.3);
@@ -65,7 +58,6 @@
 
 .container-submenu .general p {
   margin-bottom: 0;
-
 }
 
 .general a {
@@ -83,7 +75,6 @@
 .container-submenu .access .btn {
   background: var(--color-white);
   border-radius: 20px;
-  color: var(--color-white);
   border-color: #07B2FD;
 }
 
@@ -99,14 +90,13 @@
 }
 
 .rate {
-  float: left;
-  height: 46px;
-  padding: 0 10px;
+  margin-top: 0.4vw;
+  margin-left: 1vw;
 }
 
 .rate:not(:checked)>input {
   position: absolute;
-  top: -9999px;
+  opacity: 0;
 }
 
 .rate:not(:checked)>label {
