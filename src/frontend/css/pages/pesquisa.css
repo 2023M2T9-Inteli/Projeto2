@@ -3,7 +3,7 @@
 html {
     background: var(--color-white);
 }
-/* define a altura do body como 100%*/
+/* define a altura do body como 100% da viewport */
 body {
     min-height: 100vh;
 }

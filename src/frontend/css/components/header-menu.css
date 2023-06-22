@@ -1,5 +1,6 @@
 @import url("../root.css");
 
+/* header do panpedia */
 header {
     display: flex;
     width: 95%;
@@ -7,17 +8,22 @@ header {
     justify-content: space-between;
     align-items: center;
 }
-
+/* logo do banco pan */
 .header-components-img {
     width: 35px;
     margin-top: .5rem;
 }
-
+/* nome do panpedia */
 header h1 {
     font-size: var(--font-size-small);
     margin: 0;
 }
-
+/* "Pan" no Panpedia */
+.header-components {
+    color: var(--color-primary);
+    font-size: var(--font-size-medium);
+}
+/* icone do menu */
 header i {
     color: var(--color-primary);
     font-size: 1.5rem;
@@ -25,42 +31,36 @@ header i {
     cursor: pointer;
 }
 
-/* Cor primária no Panpedia*/
-.header-components {
-    color: var(--color-primary);
-    font-size: var(--font-size-medium);
+.fa-circle-xmark {
+    color: white;
+    text-decoration: none;
 }
-
+/* menu lateral */
 .menu {
     position: absolute;
     flex-direction: column;
     display: block;
-
     right: 2.4vw;
     top: 2.5%;
-
     padding: 1vw;
-
     width: 18vw;
     height: 90vh;
-
     filter: drop-shadow(-3px 3px 0px rgba(0, 0, 0, 0.199));
     border-radius: 20px;
     background-color: var(--color-primary);
-
     transition: .3s;
 }
-
+/* ocultar menu */
 .menuIsClose {
     visibility: hidden;
     height: 0vh;
     opacity: 0;
 }
-
+/* div com os botões pesquisar intrucoes e tickets */
 .todos-itens{
     margin-top: 2rem;
 }
-
+/* botão fechar menu */
 .close {
     position: absolute;
     top: 0px;
@@ -72,7 +72,7 @@ header i {
     color: var(--color-red);
     transition: .4s ease-in;
 }
-
+/* classe com cada botão do menu */
 .menuItens {
     display: flex;
     padding: 1rem;
@@ -97,7 +97,7 @@ header i {
     color: var(--color-menu);
     font-size: var(--font-size-small);
 }
-
+/* div com o botão de tema escuro */
 .theme-cursor {
     cursor: pointer;
     display: flex;
@@ -122,13 +122,8 @@ header i {
     padding-left: 1rem;
     margin-bottom: 0;
 }
-
+/* icone de modo escuro */
 .fa-circle-half-stroke {
     color: var(--color-grey-dark);
-    text-decoration: none;
-}
-
-.fa-circle-xmark {
-    color: white;
     text-decoration: none;
 }
