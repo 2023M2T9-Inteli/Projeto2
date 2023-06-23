@@ -23,7 +23,7 @@ main {
     border-radius: 20px;
     margin-top: 1rem;
 }
-/* botão de enviar ticket */
+/* botões de enviar e cancelar ticket */
 .btn {
     background: var(--color-primary);
     color: var(--color-grey-dark);
