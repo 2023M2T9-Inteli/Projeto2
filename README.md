@@ -63,7 +63,7 @@ npm start
 ```
 5. Agora você pode acessar a aplicação através do link http://localhost:127.0.0.1/ segurando o botão "ctrl" e clicando com o botão esquedo do mouse ou touch pad;
 6. O servidor está online.
-7. Caso queira algo mais rápido para testar o site.<a href="https://n4kqrp-5500.csb.app/index.html"> Aqui está o link para o site do prjeto </a>
+7. Caso queira algo mais rápido para testar o site.<a href="https://n4kqrp-5500.csb.app/index.html"> Aqui está o link para o site do projeto </a>
 
 ## 🗃 Histórico de lançamentos
 
